@@ -23,7 +23,7 @@ print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'> "._("Announcement")."</h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'> "._translate("Announcement")."</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 
@@ -31,13 +31,13 @@ print "
 <table width='80%' cellspacing='1' class='table'>
 
 <tr>
-<th>"._("Time")."</th>
-<th>"._("Announcement")."</th>
+<th>"._translate("Time")."</th>
+<th>"._translate("Announcement")."</th>
 </tr>";
 while ($r = $db->fetch_row($q)) {
     if ($ac > 0) {
         $ac--;
-        $new = "<br /><b>"._("New")."!</b>";
+        $new = "<br /><b>"._translate("New")."!</b>";
     } else {
         $new = "";
     }

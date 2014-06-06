@@ -28,7 +28,7 @@ if (!$ir['donatordays']) {
 <div class='upgradepart'>
 <div class='upgradepart_left'>
 <h1><img src='images/upgrade_img.jpg' alt='' /></h1>
-<p>You are not a Respected <b>Mob</b> Boss? <br/><span>Check out what you’re missing!</span></p>
+<p>"._translate("You are not a Respected <b>Mob</b> Boss?")." <br/><span>"._translate("Check out what you’re missing!")."</span></p>
 
 <h2><a href='donator.php'><img src='images/click_upgradebtn.jpg' title='Click here to Upgrade!' alt='Click here to Upgrade!' /></a></h2>
 </div>
@@ -36,16 +36,16 @@ if (!$ir['donatordays']) {
 <div><img src='images/gain_top.jpg' alt='' /></div>
 <div class='gain_md'>
 <ul>
-<li>- Special Donator Badge & Respected Ribbon</li>
-<li>- Gain Energy twice as quick</li>
-<li>- Gain HP twice as quick</li>
-<li>- Gain Will twice as quick</li>    
-<li>- Gain Brave twice as quick</li>
-<li>- Different Color Name</li>
-<li>- Special Will Package</li>
-<li>- Special Money and Recopla Package</li> 
-<li>- Add Friend/Enemy</li>
-<li>- And Much Much More</li>
+<li>- "._translate("Special Donator Badge & Respected Ribbon")."</li>
+<li>- "._translate("Gain Energy twice as quick")."</li>
+<li>- "._translate("Gain HP twice as quick")."</li>
+<li>- "._translate("Gain Will twice as quick")."</li>
+<li>- "._translate("Gain Brave twice as quick")."</li>
+<li>- "._translate("Different Color Name")."</li>
+<li>- "._translate("Special Will Package")."</li>
+<li>- "._translate("Special Money and Recopla Package")."</li>
+<li>- "._translate("Add Friend/Enemy")."</li>
+<li>- "._translate("And Much Much More")."</li>
 </ul>                                
 </div>
 
@@ -74,11 +74,11 @@ print"
 </tr>";
 $exp = (int)($ir['exp'] / $ir['exp_needed'] * 100);
 print "<tr>
-<td width=50%><b>Name:</b> {$ir['username']}</td><td><b>Recoplas:</b> {$cm}</td></tr><tr>
-<td><b>Level:</b> {$ir['level']}</td>
-<td><b>Exp:</b> {$exp}%</td></tr><tr>
-<td><b>Money:</b> $fm</td>
-<td><b> Gang:</b> ";
+<td width=50%><b>"._translate("Name:")."</b> {$ir['username']}</td><td><b>Recoplas:</b> {$cm}</td></tr><tr>
+<td><b>"._translate("Level:")."</b> {$ir['level']}</td>
+<td><b>"._translate("Exp:")."</b> {$exp}%</td></tr><tr>
+<td><b>"._translate("Money:")."</b> $fm</td>
+<td><b> "._translate("Gang:")."</b> ";
 $qs = $db->query("SELECT * FROM gangs WHERE gangID={$ir['gang']}");
 $rs = $db->fetch_row($qs);
 if (!$db->num_rows($qs)) {
@@ -89,12 +89,12 @@ if (!$db->num_rows($qs)) {
 print "
 </td>
 </tr>
-<tr><td><b>Property:</b> {$ir['hNAME']}</td>  
-<td><b>Days Old:</b> {$ir['daysold']} </td></tr>
-<tr><td><b> Health:</b> {$ir['hp']}/{$ir['maxhp']}  </td>
-<td><b>Energy:</b>  {$ir['energy']}/{$ir['maxenergy']} </td></tr>
-<tr><td><b> Brave:</b> {$ir['brave']}/{$ir['maxbrave']}  </td>
-<td><b>Will:</b>  {$ir['will']}/{$ir['maxwill']} </td></tr>
+<tr><td><b>"._translate("Property:")."</b> {$ir['hNAME']}</td>
+<td><b>"._translate("Days Old:")."</b> {$ir['daysold']} </td></tr>
+<tr><td><b> "._translate("Health:")."</b> {$ir['hp']}/{$ir['maxhp']}  </td>
+<td><b>"._translate("Energy:")."</b>  {$ir['energy']}/{$ir['maxenergy']} </td></tr>
+<tr><td><b> "._translate("Brave:")."</b> {$ir['brave']}/{$ir['maxbrave']}  </td>
+<td><b>"._translate("Will:")."</b>  {$ir['will']}/{$ir['maxwill']} </td></tr>
 <tr>
 <th colspan=3></th>
 </tr>
@@ -124,14 +124,14 @@ $ir['robskill'] = number_format($ir['robskill']);
 $ir['IQ'] = number_format($ir['IQ']);
 $ts = number_format($ts);
 
-print "<tr><th width='33%'>Stat</th><th width='33%'>Amount</th><th width='34%'>Rank</th></tr>
-<tr><td>Strength</td> <td>{$ir['strength']}</td> <td>Rank: {$ir['strank']}</td></tr>
-<tr><td>Agility</td><td> {$ir['agility']} </td><td>Rank: {$ir['agirank']}</td></tr>
-<tr><td>Guard</td><td>{$ir['guard']}</td><td>Rank: {$ir['guarank']}</td></tr>
-<tr><td>Labour</td><td>{$ir['labour']}</td><td>Rank: {$ir['labrank']}</td></tr>
-<tr><td>Rob Skill</td><td>{$ir['robskill']}</td><td>Rank: {$ir['robrank']}</td></tr>
-<tr><td>IQ</td><td>{$ir['IQ']}</td><td>Rank: {$ir['IQrank']}</td></tr> 
-<tr><td>Total Stats:</td><td>{$ts}</td><td>Rank: $tsrank</td></tr>
+print "<tr><th width='33%'>Stat</th><th width='33%'>"._translate("Amount")."</th><th width='34%'>"._translate("Rank")."</th></tr>
+<tr><td>"._translate("Strength")."</td> <td>{$ir['strength']}</td> <td>"._translate("Rank:")." {$ir['strank']}</td></tr>
+<tr><td>"._translate("Agility")."</td><td> {$ir['agility']} </td><td>"._translate("Rank:")." {$ir['agirank']}</td></tr>
+<tr><td>"._translate("Guard")."</td><td>{$ir['guard']}</td><td>"._translate("Rank:")." {$ir['guarank']}</td></tr>
+<tr><td>"._translate("Labour")."</td><td>{$ir['labour']}</td><td>"._translate("Rank:")." {$ir['labrank']}</td></tr>
+<tr><td>"._translate("Rob Skill")."</td><td>{$ir['robskill']}</td><td>"._translate("Rank:")." {$ir['robrank']}</td></tr>
+<tr><td>"._translate("IQ")."</td><td>{$ir['IQ']}</td><td>"._translate("Rank:")." {$ir['IQrank']}</td></tr>
+<tr><td>"._translate("Total Stats:")."</td><td>{$ts}</td><td>"._translate("Rank:")." $tsrank</td></tr>
 <tr><th colspan=3></th></tr>
 </table> </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 
@@ -192,14 +192,14 @@ echo "
 <br><table width=75% border=2 class=table style= text-align:center; >     
 
 ";
-echo sprintf('   
-<table width="73%%" class=table bgcolor="#000000" cellpadding="1" bordercolor="Silver" border="1">     
+echo sprintf('
+<table width="73%%" class=table bgcolor="#000000" cellpadding="1" bordercolor="Silver" border="1">
 <tr>
-<th > <font color=green> Won </font></th> <th > Amount</th> <th > <font color=red> Lost</th> </font> <th > Amount</th> 
-</tr> 
-<tr>  
+<th > <font color=green> '._translate("Won").' </font></th> <th > '._translate("Amount").'</th> <th > <font color=red> '._translate("Lost").'</th> </font> <th > '._translate("Amount").'</th>
+</tr>
+<tr>
 <td>
-<font color=green>Attacking Won</font>
+<font color=green>'._translate("Attacking Won").'</font>
 </td>
 
 <td>
@@ -208,7 +208,7 @@ echo sprintf('
 
 <center></center>
 <td>
-<font color=red> Attacking Lost</font>
+<font color=red> '._translate("Attacking Lost").'</font>
 </td>
 
 <td>
@@ -220,7 +220,7 @@ echo sprintf('
 
 <tr>
 <td>
-<font color=green>Defending Won</font>
+<font color=green>'._translate("Defending Won").'</font>
 </td>
 
 <td>
@@ -228,7 +228,7 @@ echo sprintf('
 </td>
 
 <td>
-<font color=red>Defending Lost</font>
+<font color=red>'._translate("Defending Lost").'</font>
 </td>
 
 <td>
@@ -241,13 +241,13 @@ echo sprintf('
 
 <tr>
 <td>
-<font color=green>Total Won</font>
+<font color=green>'._translate("Total Won").'</font>
 </td>
 <td>
 %u (%u%%)
 </td>
 <td>
-<font color=red>Total Lost</font>
+<font color=red>'._translate("Total Lost").'</font>
 </td>
 
 <td>
@@ -282,7 +282,7 @@ echo sprintf('
 if (isset($_POST['pn_update'])) {
     $db->query("UPDATE users SET user_notepad='{$_POST['pn_update']}' WHERE userid=$userid");
     $ir['user_notepad'] = stripslashes($_POST['pn_update']);
-    print "<br><br><b>Personal Notepad Updated!</b>";
+    print "<br><br><b>"._translate("Personal Notepad Updated!")."</b>";
 }
 
 

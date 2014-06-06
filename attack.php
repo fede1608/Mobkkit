@@ -21,23 +21,23 @@ include "globals.php";
 
 $_GET['ID'] = isset($_GET['ID']) && is_numeric($_GET['ID']) ? abs(@intval($_GET['ID'])) : false;
 if (!$_GET['ID']) {
-    print "<font color=white>"._("Invalid Command, Try Again Later.")."
-<br><a href='index.php'>> "._("Go Back")." <</a>";
+    print "<font color=white>"._translate("Invalid Command, Try Again Later.")."
+<br><a href='index.php'>> "._translate("Go Back")." <</a>";
     $h->endpage();
     exit;
 } else if ($_GET['ID'] == $userid) {
-    print "<center>"._("Only the crazy attack themselves.")."
-<br><a href='index.php'>> "._("Go Back")." <</a>";
+    print "<center>"._translate("Only the crazy attack themselves.")."
+<br><a href='index.php'>> "._translate("Go Back")." <</a>";
     $h->endpage();
     exit;
 } else if ($ir['hp'] <= 1) {
-    print "<center>"._("Only the crazy attack when their unconscious.")."
-<br><a href='index.php'>> "._("Go Back")." <</a>";
+    print "<center>"._translate("Only the crazy attack when their unconscious.")."
+<br><a href='index.php'>> "._translate("Go Back")." <</a>";
     $h->endpage();
     exit;
 } else if ($_SESSION['attacklost'] == 1) {
-    print "<center>"._("Only the losers of all their EXP attack when they've already lost.")."
-<br><a href='index.php'>> "._("Go Back")." <</a>";
+    print "<center>"._translate("Only the losers attack when they've already lost all of their EXP.")."
+<br><a href='index.php'>> "._translate("Go Back")." <</a>";
     $_SESSION['attacklost'] = 0;
     $h->endpage();
     exit;
@@ -50,14 +50,14 @@ $odata = $db->fetch_row($q);
 $myabbr = ($ir['gender'] == "Male") ? "his" : "her";
 $oabbr = ($ir['gender'] == "Male") ? "his" : "her";
 if ($ir['attacking'] && $ir['attacking'] != $_GET['ID']) {
-    print "<center>"._("Your already in a fight, but some reason cant get back to it...<br />Please wait 1 hour (game time) then you can attack players again.")."
+    print "<center>"._translate("Your already in a fight, but some reason cant get back to it...<br />Please wait 1 hour (game time) then you can attack players again.")."
 <br><a href='index.php'>> Go Back <</a>";
     $_SESSION['attacklost'] = 0;
     $h->endpage();
     exit;
 }
 if ($odata['hp'] == 1) {
-    print "<center>"._("This player is unconscious.")."
+    print "<center>"._translate("This player is unconscious.")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     $_SESSION['attacking'] = 0;
@@ -68,7 +68,7 @@ if ($odata['hp'] == 1) {
 
 $hospit = rand(10, 30);
 if ($odata['bguard'] > 0) {
-    print" <center><b><font color='#FFFF00'>"._("Holy Shit!")."</b></font> "._("You Just Got Your Ass Kicked By The Bodygaurd!! You were injured and taken to the hspital for")." $hospit min<br/><br/><a href='index.php'>>"._("Home")."</a></center>";
+    print" <center><b><font color='#FFFF00'>"._translate("Holy Shit!")."</b></font> "._translate("You Just Got Your Ass Kicked By The Bodygaurd!! You were injured and taken to the hspital for")." $hospit min<br/><br/><a href='index.php'>>"._translate("Home")."</a></center>";
     $h->endpage();
     $db->query("UPDATE users SET hp=0, hospital=hospital+$hospit, hospreason='Beaten Severely By Someones Personal Bodyguard' WHERE userid=$userid", $c);
     exit;
@@ -79,11 +79,11 @@ if ($_GET['nextstep'] > 100) {
 <a href='index.php'>> Go Back <</a></center>";
     $h->endpage();
     $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
-    event_add($odata['userid'], "<a href='viewuser.php?u=$userid'>{$youdata['username']}</a> "._("Tried to beat you but stalemated."), $c);
-    event_add($youdata['userid'], " "._("You Tried to beat")." <a href='viewuser.php?u={$odata['userid']}'>{$odata['username']}</a> but stalemated.", $c);
+    event_add($odata['userid'], "<a href='viewuser.php?u=$userid'>{$youdata['username']}</a> "._translate("Tried to beat you but stalemated."), $c);
+    event_add($youdata['userid'], " "._translate("You Tried to beat")." <a href='viewuser.php?u={$odata['userid']}'>{$odata['username']}</a> but stalemated.", $c);
     exit;
 } else if ($odata['hospital']) {
-    print "<center>"._("This player is in hospital.")."
+    print "<center>"._translate("This player is in hospital.")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     $_SESSION['attacking'] = 0;
@@ -91,7 +91,7 @@ if ($_GET['nextstep'] > 100) {
     $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
     exit;
 } else if ($ir['hospital']) {
-    print "<center>"._("While in hospital you can't attack.")."
+    print "<center>"._translate("While in hospital you can't attack.")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     $_SESSION['attacking'] = 0;
@@ -99,7 +99,7 @@ if ($_GET['nextstep'] > 100) {
     $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
     exit;
 } else if ($odata['jail']) {
-    print "<center>"._("This player is in jail.")."
+    print "<center>"._translate("This player is in jail.")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     $_SESSION['attacking'] = 0;
@@ -107,7 +107,7 @@ if ($_GET['nextstep'] > 100) {
     $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
     exit;
 } else if ($ir['jail']) {
-    print "<center>"._("While in jail you can't attack.")."
+    print "<center>"._translate("While in jail you can't attack.")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     $_SESSION['attacking'] = 0;
@@ -115,7 +115,7 @@ if ($_GET['nextstep'] > 100) {
     $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
     exit;
 } else if ($odata['travelling']) {
-    print "<center>"._("That player is travelling.")."
+    print "<center>"._translate("That player is travelling.")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     $_SESSION['attacking'] = 0;
@@ -123,22 +123,22 @@ if ($_GET['nextstep'] > 100) {
     $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
     exit;
 } else if ($youdata['location'] != $odata['location']) {
-    print "<center>"._("You can only attack someone in the same location!")."
+    print "<center>"._translate("You can only attack someone in the same location!")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     exit;
-} else if ($odata['hp'] < 50) {
-    print "<center>"._("You can only attack those who have atleast 50% health !")."
+} else if ($odata['hp'] < 50 && ($_SESSION['attacking'] == 1 && $ir['attacking'] == 1)) {
+    print "<center>"._translate("You can only attack those who have atleast 50% health !")."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     exit;
 } else if ($ir['gang'] == $odata['gang'] && $ir['gang'] > 0) {
-    print "<center>".sprintf(_("You are in the same gang as %s!<br>Why would you attack someone in your gang?!"),$odata['username'])."
+    print "<center>".sprintf(_translate("You are in the same gang as %s!<br>Why would you attack someone in your gang?!"),$odata['username'])."
 <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     exit;
 } else if ($ir['equip_primary'] == 0) {
-    print "<center>"._("You need a Primary Weapon to attack...")."
+    print "<center>"._translate("You need a Primary Weapon to attack...")."
     <br><a href='index.php'>> Go Back <</a>";
     $h->endpage();
     exit;
@@ -156,7 +156,7 @@ if ($_GET['wepid']) {
             $_SESSION['attacklog'] = "";
             $_SESSION['attackdmg'] = 0;
         } else {
-            print _("You can only attack someone when you have 50% energy");
+            print _translate("You can only attack someone when you have 50% energy");
             exit;
         }
     }
@@ -168,7 +168,7 @@ if ($_GET['wepid']) {
 //damage
 
     if ($_GET['wepid'] != $ir['equip_primary'] && $_GET['wepid'] != $ir['equip_secondary']) {
-        print _("Stop trying to abuse a game bug. You can lose all your EXP for that.")."<br />
+        print _translate("Stop trying to abuse a game bug. You can lose all your EXP for that.")."<br />
 <a href='index.php'>&gt; Home</a>";
         $db->query("UPDATE users SET exp=0 where userid=$userid", $c);
         die("");
@@ -212,7 +212,7 @@ if ($_GET['wepid']) {
         $_SESSION['attackwon'] = $_GET['ID'];
         $db->query("UPDATE users SET hp=0 WHERE userid={$_GET['ID']}");
         print "<br />
-<b>".sprintf(_("What do you want to do with %s now?"),$odata['username'])."</b><br /><br />
+<b>".sprintf(_translate("What do you want to do with %s now?"),$odata['username'])."</b><br /><br />
 <form action='attackwon.php?ID={$_GET['ID']}' method='post'><input type='submit' STYLE='color: white;  background-color: red;' value='Mug Them' />  </form>  <br />  
 <form action='attackbeat.php?ID={$_GET['ID']}' method='post'><input type='submit' STYLE='color: white;  background-color: green;' value='Hospitalize Them' />  </form>  <br /> 
 <form action='attacktake.php?ID={$_GET['ID']}' method='post'><input type='submit' STYLE='color: black;  background-color: white;' value='Leave Them' /> </form>  <br /> 
@@ -220,9 +220,9 @@ if ($_GET['wepid']) {
 <br /> 
 
 
-"._("NB:If you not choose any of the option above you lose all your EXP point!")."  <br /> <br />
+"._translate("NB:If you not choose any of the option above you lose all your EXP point!")."  <br /> <br />
 
-"._("If you and the enemy beaten are on the same battle ladder mug them to get points added to the ladder table!")."
+"._translate("If you and the enemy beaten are on the same battle ladder mug them to get points added to the ladder table!")."
 
 
 
@@ -269,12 +269,12 @@ if ($_GET['wepid']) {
             $db->query("UPDATE users SET hp=hp-$dam WHERE userid=$userid");
             $ns = $_GET['nextstep'] + 1;
             //todo
-            print "<font color=blue>{$ns}. "._("Using")." $oabbr $wep {$odata['username']} "._("hit you doing")." $dam damage ({$youdata['hp']})</font><br />\n";
-            $_SESSION['attacklog'] .= "<font color=blue>{$ns}. "._("Using")." $oabbr $wep {$odata['username']} hit {$ir['username']} doing $dam damage ({$youdata['hp']})</font><br />\n";
+            print "<font color=blue>{$ns}. "._translate("Using")." $oabbr $wep {$odata['username']} "._translate("hit you doing")." $dam "._translate("damage")." ({$youdata['hp']})</font><br />\n";
+            $_SESSION['attacklog'] .= "<font color=blue>{$ns}. "._translate("Using")." $oabbr $wep {$odata['username']} hit {$ir['username']} doing $dam "._translate("damage")." ({$youdata['hp']})</font><br />\n";
         } else {
             $ns = $_GET['nextstep'] + 1;
-            print "<font color=red>{$ns}. {$odata['username']} "._("tried to hit you but missed")." ({$youdata['hp']})</font><br />\n";
-            $_SESSION['attacklog'] .= "<font color=blue>{$ns}. {$odata['username']} "._("tried to hit")." {$ir['username']} "._("but missed")." ({$youdata['hp']})</font><br />\n";
+            print "<font color=red>{$ns}. {$odata['username']} "._translate("tried to hit you but missed")." ({$youdata['hp']})</font><br />\n";
+            $_SESSION['attacklog'] .= "<font color=blue>{$ns}. {$odata['username']} "._translate("tried to hit")." {$ir['username']} "._translate("but missed")." ({$youdata['hp']})</font><br />\n";
         }
         if ($youdata['hp'] <= 0) {
             $youdata['hp'] = 0;
@@ -296,7 +296,7 @@ if ($youdata['hp'] <= 0 || $odata['hp'] <= 0) {
 
 
     $mw = $db->query("SELECT i.* FROM  items i  WHERE i.itmid IN({$ir['equip_primary']}, {$ir['equip_secondary']})");
-    print "<tr><td colspan=2 align='center'>"._("Attack with:")."<br />";
+    print "<tr><td colspan=2 align='center'>"._translate("Attack with:")."<br />";
     if ($db->num_rows($mw) > 0) {
         while ($r = $db->fetch_row($mw)) {
             if (!$_GET['nextstep']) {
@@ -305,20 +305,20 @@ if ($youdata['hp'] <= 0 || $odata['hp'] <= 0) {
                 $ns = $_GET['nextstep'] + 2;
             }
             if ($r['itmid'] == $ir['equip_primary']) {
-                print "<b>"._("Primary Weapon:")."</b> ";
+                print "<b>"._translate("Primary Weapon:")."</b> ";
             }
             if ($r['itmid'] == $ir['equip_secondary']) {
-                print "<b>"._("Secondary Weapon:")."</b> ";
+                print "<b>"._translate("Secondary Weapon:")."</b> ";
             }
             print "<a href='attack.php?nextstep=$ns&amp;ID={$_GET['ID']}&amp;wepid={$r['itmid']}'>{$r['itmname']}</a><br />";
         }
     } else {
-        print _("You have nothing to fight with.");
+        print _translate("You have nothing to fight with.");
     }
     print "</table>";
     print "
 
-<table width='50%' align='center'><tr><td align=right>"._("Your Health:")." </td><td><img src=bargreen.gif width={$vars['hpperc']} height=13><img src=barred.gif width={$vars['hpopp']} height=13></td><tr><td align=right>"._("Opponents Health:")."  </td><td><img src=bargreen.gif width={$vars2['hpperc']} height=13><img src=barred.gif width={$vars2['hpopp']} height=13></td></tr></table>";
+<table width='50%' align='center'><tr><td align=right>"._translate("Your Health:")." </td><td><img src=bargreen.gif width={$vars['hpperc']} height=13><img src=barred.gif width={$vars['hpopp']} height=13></td><tr><td align=right>"._translate("Opponents Health:")."  </td><td><img src=bargreen.gif width={$vars2['hpperc']} height=13><img src=barred.gif width={$vars2['hpopp']} height=13></td></tr></table>";
 }
 $h->endpage();
 ?>

@@ -1,6 +1,7 @@
 <?php
 
-error_reporting(0);
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
 /**************************************************************************************************
  * | Software Name        : Ravan Scripts Online Mafia Game
  * | Software Author      : Ravan Soft Tech
@@ -8,7 +9,6 @@ error_reporting(0);
  * | Website              : http://www.ravan.info/
  * | E-mail               : support@ravan.info
  * |**************************************************************************************************
-
  * | The files in the package must not be distributed in whole or significant part.
  * | All code is copyrighted unless otherwise advised.
  * | Do Not Remove Powered By Ravan Scripts without permission .
@@ -52,7 +52,7 @@ function anti_inject($campo)
 $_GET = anti_inject($_GET);
 $_POST = anti_inject($_POST);
 
-
+require_once "loadLanguage.php";
 require "global_func.php";
 if ($_SESSION['loggedin'] == 0) {
     header("Location: login.php");
