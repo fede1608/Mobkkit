@@ -19,7 +19,7 @@ include "globals.php";
 $_GET['ID'] = isset($_GET['ID']) && is_numeric($_GET['ID']) ? abs(@intval($_GET['ID'])) : false;
 print "<div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'> Crystal Market </h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'> Recopla Market </h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>";
 $_GET['action'] = isset($_GET['action']) && is_string($_GET['action']) ? strtolower(trim($_GET['action'])) : "";
@@ -66,7 +66,7 @@ function crystal_remove()
     global $db, $ir, $c, $userid, $h;
     $q = $db->query("SELECT * FROM `crystalmarket` WHERE `cmID`={$_GET['ID']} AND `cmADDER`=$userid");
     if (!$db->num_rows($q)) {
-        print "Error, either these crystals do not exist, or you are not the owner.<br /><br />
+        print "Error, either these Recoplas do not exist, or you are not the owner.<br /><br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
         $h->endpage();
         exit;
@@ -74,7 +74,7 @@ function crystal_remove()
     $r = $db->fetch_row($q);
     $db->query("UPDATE `users` SET `crystals`=`crystals`+{$r['cmQTY']} where `userid`=$userid");
     $db->query("DELETE FROM `crystalmarket` WHERE `cmID`={$_GET['ID']}");
-    print "Crystals removed from market!<br /><br />
+    print "Recoplas removed from market!<br /><br />
 <a href='cmarket.php'>Back</a> </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 }
 
@@ -83,14 +83,14 @@ function crystal_buy()
     global $db, $ir, $c, $userid, $h;
     $q = $db->query("SELECT * FROM crystalmarket cm WHERE cmID={$_GET['ID']}");
     if (!$db->num_rows($q)) {
-        print "Error, either these crystals do not exist, or they have already been bought.<br /> <br />
+        print "Error, either these Recoplas do not exist, or they have already been bought.<br /> <br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
         $h->endpage();
         exit;
     }
     $r = $db->fetch_row($q);
     if ($r['cmPRICE'] > $ir['money']) {
-        print "Error, you do not have the funds to buy these crystals.<br /><br />
+        print "Error, you do not have the funds to buy these Recoplas.<br /><br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
         $h->endpage();
         exit;
@@ -99,8 +99,8 @@ function crystal_buy()
     $db->query("DELETE FROM `crystalmarket` WHERE `cmID`={$_GET['ID']}");
     $db->query("UPDATE `users` SET `money`=`money`-{$r['cmPRICE']} where `userid`=$userid");
     $db->query("UPDATE `users` SET `money`=`money`+{$r['cmPRICE']} where `userid`={$r['cmADDER']}");
-    event_add($r['cmADDER'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought your {$r['cmQTY']} crystals from the market for \$" . number_format($r['cmPRICE']) . ".", $c);
-    print "You bought {$r['cmQTY']} crystals from the market for \$" . number_format($r['cmPRICE']) . ".<br /> <br />
+    event_add($r['cmADDER'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought your {$r['cmQTY']} Recoplas from the market for \$" . number_format($r['cmPRICE']) . ".", $c);
+    print "You bought {$r['cmQTY']} Recoplas from the market for \$" . number_format($r['cmPRICE']) . ".<br /> <br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
 
 }
@@ -112,7 +112,7 @@ function crystal_add()
     $_POST['price'] = abs(@intval($_POST['price']));
     if ($_POST['amnt']) {
         if ($_POST['amnt'] > $ir['crystals']) {
-            print "You are trying to add more crystals to the market than you have. <br /><br />
+            print "You are trying to add more Recoplas to the market than you have. <br /><br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
             $h->endpage();
             exit;
@@ -120,7 +120,7 @@ function crystal_add()
         $tp = $_POST['amnt'] * $_POST['price'];
         $db->query("INSERT INTO `crystalmarket` VALUES('',{$_POST['amnt']},$userid,$tp)");
         $db->query("UPDATE `users` SET `crystals`=`crystals`-{$_POST['amnt']} WHERE `userid`=$userid");
-        print "Crystals added to market!<br /><br />
+        print "Recoplas added to market!<br /><br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
         $h->endpage();
         exit;
@@ -128,13 +128,13 @@ function crystal_add()
 
 
     if ($ir['crystals'] == 0) {
-        print"You have no crystals.<br /> <br />
+        print"You have no Recoplas.<br /> <br />
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     } else {
         print " <b>Adding a listing...</b><br /><br />
-You have <b>{$ir['crystals']}</b> crystal(s) that you can add to the market.<form action='cmarket.php?action=add' method='post'>
+You have <b>{$ir['crystals']}</b> Recopla(s) that you can add to the market.<form action='cmarket.php?action=add' method='post'>
     <table width=100% class =table  border=2 align='center'><tr>
-<td>Crystals:</td> <td><input type='text' STYLE='color: black;  background-color: white;' name='amnt' value='{$ir['crystals']}' /></td></tr><tr>
+<td>Recoplas:</td> <td><input type='text' STYLE='color: black;  background-color: white;' name='amnt' value='{$ir['crystals']}' /></td></tr><tr>
 <td>Price Each:</td> <td><input type='text' STYLE='color: black;  background-color: white;' name='price' value='200' /></td></tr><tr>
 <td colspan=2 align=center><input type='submit' STYLE='color: black;  background-color: white;' value='Add To Market' /></tr></table></form><br /> 
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";

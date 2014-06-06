@@ -97,7 +97,7 @@ Searching is a vital part of the game. Initially you may only search the Streets
 <br />
 You choose your search area, and wait to see what your result is. You may find potions, weapons or armour! Of course, that's just the basic items you are able to gain; at higher levels, you will find that your searches will become more and more rewarding.<br />
 <br />
-You will get 25 free searches every day, and if that's not enough, you can always refill that 25 searches using 200 white crystals. Note that the searches will not carry over to the next day so you should finish them before the day is over.<br />
+You will get 25 free searches every day, and if that's not enough, you can always refill that 25 searches using 200 white Recoplas. Note that the searches will not carry over to the next day so you should finish them before the day is over.<br />
 <br />
 Take your chances of good and bad outcomes, and long term you will find yourself better off.
         <div style='text-align: right; font-size: 9px; height: 6px; font-weight: bold;'>
@@ -109,7 +109,7 @@ Take your chances of good and bad outcomes, and long term you will find yourself
 <div style='background-color: #000000; border: 1px #FFFFFF solid; padding: 8px;'>
 Courses give you the opportunity to train yourself with various skills to help improve you as a killer.<br />
 <br />
-You can only do 1 course at any one time, and attend the course once an hour. The maximum number a day for one course is 6 but this you can have extra 2 hours if you spend white crystals. These extra trains gained by using white crystals aren't permanent and must be used before {$set['game_name']} new day begins . Each time you attend, it costs 5 Energy, but the outcomes are worthwhile for the effort in the long term.<br />
+You can only do 1 course at any one time, and attend the course once an hour. The maximum number a day for one course is 6 but this you can have extra 2 hours if you spend white Recoplas. These extra trains gained by using white Recoplas aren't permanent and must be used before {$set['game_name']} new day begins . Each time you attend, it costs 5 Energy, but the outcomes are worthwhile for the effort in the long term.<br />
 
 <br />
 If you have finished a course you can view what you got by going to Courses and on main page at bottom click View each to the course you want to see information about.
@@ -144,7 +144,7 @@ When in Hospital you will not be able to do anything until your Time Left in the
 
 <p style='padding-left: 15px;' id='guide13'>Hall of Fame</p>
 <div style='background-color: #000000; border: 1px #FFFFFF solid; padding: 8px;'>
-Hall of Fame consists of the best Players and Gangs on {$set['game_name']}, you will find the Top 20 for each category; Level, Gold, Gang Respect, White Crystals, Best House, Lottery Wins, Lottery Winnings, Rescues, Crimes and Courses Finished.        <div style='text-align: right; font-size: 9px; height: 6px; font-weight: bold;'>
+Hall of Fame consists of the best Players and Gangs on {$set['game_name']}, you will find the Top 20 for each category; Level, Gold, Gang Respect, White Recoplas, Best House, Lottery Wins, Lottery Winnings, Rescues, Crimes and Courses Finished.        <div style='text-align: right; font-size: 9px; height: 6px; font-weight: bold;'>
         [<a href='helptutorial.php#contents' style='font-weight: normal; color:#990000;'>back to top</a>]&nbsp;
         [<a href='explore.php' style='font-weight: normal; color:#990000;'>back to explore</a>]</div></div>
 

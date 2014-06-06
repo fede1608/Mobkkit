@@ -23,11 +23,11 @@ Prices and payment options are listed below, different currencies have different
 <a href='bodyguard.php?spend=10minsM'>Hire For 10 Minutes - \$10,000,000</a><br />
 <a href='bodyguard.php?spend=30minsM'>Hire For 30 Minutes - \$30,000,000</a><br />
 <a href='bodyguard.php?spend=1hourM'>Hire For 1 Hour - \$60,000,000</a><br />
-<h3>Pay With Crystals</h3>
-<a href='bodyguard.php?spend=5minsC'>Hire for 5 Minutes - 50 Crystals</a><br />
-<a href='bodyguard.php?spend=10minsC'>Hire for 10 Minutes - 100 Crystals</a><br />
-<a href='bodyguard.php?spend=30minsC'>Hire for 30 Minutes - 300 Crystals</a><br />
-<a href='bodyguard.php?spend=1hourC'>Hire for 1 Hour - 600 Crystals</a><br /><br/><br/><br/><br/>
+<h3>Pay With Recoplas</h3>
+<a href='bodyguard.php?spend=5minsC'>Hire for 5 Minutes - 50 Recoplas</a><br />
+<a href='bodyguard.php?spend=10minsC'>Hire for 10 Minutes - 100 Recoplas</a><br />
+<a href='bodyguard.php?spend=30minsC'>Hire for 30 Minutes - 300 Recoplas</a><br />
+<a href='bodyguard.php?spend=1hourC'>Hire for 1 Hour - 600 Recoplas</a><br /><br/><br/><br/><br/>
 </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>
 
 ";
@@ -65,28 +65,28 @@ Prices and payment options are listed below, different currencies have different
             print "You don't have enough silver to hire a bodyguard!";
         } else {
             $db->query("UPDATE users SET bguard=bguard+5,crystals=crystals-50 WHERE userid=$userid");
-            print "Congratulations, You payed a bodyguard 50 Crystals to protect you for 5 minutes.";
+            print "Congratulations, You payed a bodyguard 50 Recoplas to protect you for 5 minutes.";
         }
     } else if ($_GET['spend'] == '10minsC') {
         if ($ir['crystals'] < 100) {
-            print "You don't have enough crystals to hire a bodyguard!";
+            print "You don't have enough Recoplas to hire a bodyguard!";
         } else {
             $db->query("UPDATE users SET bguard=bguard+10,crystals=crystals-100 WHERE userid=$userid");
-            print "Congratulations, You payed a bodyguard 100 Crystals to protect you for 10 minutes.";
+            print "Congratulations, You payed a bodyguard 100 Recoplas to protect you for 10 minutes.";
         }
     } else if ($_GET['spend'] == '30minsC') {
         if ($ir['crystals'] < 300) {
-            print "You don't have enough crystals to hire a bodyguard!";
+            print "You don't have enough Recoplas to hire a bodyguard!";
         } else {
             $db->query("UPDATE users SET bguard=bguard+30,crystals=crystals-300 WHERE userid=$userid");
-            print "Congratulations, You payed a bodyguard 300 Crystals to protect you for 30 minutes.";
+            print "Congratulations, You payed a bodyguard 300 Recoplas to protect you for 30 minutes.";
         }
     } else if ($_GET['spend'] == '1hourC') {
         if ($ir['crystals'] < 600) {
-            print "You don't have enough crystals to hire a bodyguard!";
+            print "You don't have enough Recoplas to hire a bodyguard!";
         } else {
             $db->query("UPDATE users SET bguard=bguard+60,crystals=crystals-600 WHERE userid=$userid");
-            print "Congratulations, You payed a bodyguard 600 Crystals to protect you for 1 hour.";
+            print "Congratulations, You payed a bodyguard 600 Recoplas to protect you for 1 hour.";
         }
     }
 }

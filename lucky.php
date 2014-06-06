@@ -62,7 +62,7 @@ Sorry, it costs \$1,000 to open a box. Come back when you have enough.";
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
 
 
-You have gained {$tokens} crystals.  
+You have gained {$tokens} Recoplas.  
 
 ";
             $db->query("UPDATE users SET crystals=crystals+{$tokens} WHERE userid={$userid}");

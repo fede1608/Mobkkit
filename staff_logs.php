@@ -224,7 +224,7 @@ function view_crys_logs()
     print "
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'> Crystal Xfer Logs</h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'> Recopla Xfer Logs</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 
@@ -239,7 +239,7 @@ function view_crys_logs()
         print "<tr><td>{$r['cxID']}</td> <td>" . date("F j, Y, g:i:s a", $r['cxTIME']) . "</td><td><a href='viewuser.php?u={$r['cxFROM']}'>{$r['sender']}</a> [{$r['cxFROM']}] (IP: {$r['cxFROMIP']}) </td><td><a href='viewuser.php?u={$r['cxTO']}'>{$r['sent']}</a> [{$r['cxTO']}] (IP: {$r['cxTOIP']}) </td> <td>$m</td> <td> {$r['cxAMOUNT']} crystals</td> <td> [<a href='staff_punit.php?action=fedform&XID={$r['cxFROM']}'>Jail Sender</a>] [<a href='staff_punit.php?action=fedform&XID={$r['cxTO']}'>Jail Receiver</a>]</td> </tr>";
     }
     print "</table> </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
-    stafflog_add("Viewed the Crystal Xfer Logs");
+    stafflog_add("Viewed the Recopla Xfer Logs");
 }
 
 function view_mail_logs()

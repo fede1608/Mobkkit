@@ -147,7 +147,7 @@ $('#points_money').html(resarray[1]);
 
 <div class="event_txt"><a href="events.php" style="color:#fff;"><span>($ec)</span> Events</a></div> </div>  <br/>
 <div class="messagepart" id="points_money">
-<div class="point_txt">Crystals:&nbsp;<span> $crystals </span><br/></div>
+<div class="point_txt">Recoplas:&nbsp;<span> $crystals </span><br/></div>
 <div class="gold_txt">Money:&nbsp;<span>$money</span></div>
 
 </div>              
@@ -291,7 +291,7 @@ Reason: {$r['fed_reason']}</font></b> </P></CENTER> </body></html>");
 <style="color:#ffffff;"><b><a href='viewuser.php?u={$ir['userid']}'> $gn{$u} </a> [{$ir['userid']}] $d </b><br/>
 <span>Money:</span> {$fm}<br/>
 <span>Level:</span> {$ir['level']} <br/>
-<span>Crystals:</span> {$cm} <br/>
+<span>Recoplas:</span> {$cm} <br/>
 
 </div>
 

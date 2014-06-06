@@ -97,7 +97,7 @@ Password: <input type='text' STYLE='color: black;  background-color: white;' nam
 Type: <input type='radio' name='user_level' value='0' />NPC <input type='radio' name='user_level' value='1' checked='checked' />Regular Member<br />
 Level: <input type='text' STYLE='color: black;  background-color: white;' name='level' value='1' /><br />
 Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' value='100' /><br />
-Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' value='0' /><br />
+Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' value='0' /><br />
 Donator Days: <input type='text' STYLE='color: black;  background-color: white;' name='donatordays' value='0' /><br />
 Gender: <select name='gender' type='dropdown'><option>Male</option><option>Female</option></select><br />
 <br />
@@ -199,7 +199,7 @@ Level: <input type='text' STYLE='color: black;  background-color: white;' name='
 Money: \$<input type='text' STYLE='color: black;  background-color: white;' name='money' value='{$itemi['money']}' /><br />
 Bank: \$<input type='text' STYLE='color: black;  background-color: white;' name='bankmoney' value='{$itemi['bankmoney']}' /><br />
 Cyber Bank: \$<input type='text' STYLE='color: black;  background-color: white;' name='cybermoney' value='{$itemi['cybermoney']}' /><br />
-Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' value='{$itemi['crystals']}' /><br />
+Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' value='{$itemi['crystals']}' /><br />
 Mail Ban: <input type='text' STYLE='color: black;  background-color: white;' name='mailban' value='{$itemi['mailban']}' /><br />
 Mail Ban Reason: <input type='text' STYLE='color: black;  background-color: white;' name='mb_reason' value='{$itemi['mb_reason']}' /><br />
 Forum Ban: <input type='text' STYLE='color: black;  background-color: white;' name='forumban' value='{$itemi['forumban']}' /><br />
@@ -451,10 +451,10 @@ function credit_user_form()
 <div class='generalinfo_simple'><br> <br><br>
 
 
-You can give a user money/crystals.<br />
+You can give a user money/Recoplas.<br />
 <form action='staff_users.php?action=creditsub' method='post'>
 User: " . user_dropdown($c, 'user') . "<br />
-Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /> Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
+Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /> Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Credit User' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
 }
 
@@ -470,7 +470,7 @@ function credit_user_submit()
     print "User credited.";
     $d = $db->query("SELECT username FROM users WHERE userid='{$_POST['user']}'");
     $un = $db->fetch_single($d);
-    stafflog_add("Credited $un [{$_POST['user']}] \${$_POST['money']} and/or {$_POST['crystals']} crystals.");
+    stafflog_add("Credited $un [{$_POST['user']}] \${$_POST['money']} and/or {$_POST['crystals']} Recoplas.");
 }
 
 function mcredit_user_form()
@@ -487,9 +487,9 @@ function mcredit_user_form()
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 
-You can give all users money/crystals.<br />
+You can give all users money/Recoplas.<br />
 <form action='staff_users.php?action=masscreditsub' method='post'>
-Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /> Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
+Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /> Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Credit User' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
 }
 
@@ -503,7 +503,7 @@ function mcredit_user_submit()
     $_POST['crystals'] = (int)$_POST['crystals'];
     $db->query("UPDATE users u SET money=money+{$_POST['money']}, crystals=crystals+{$_POST['crystals']}");
     print "All Users credited. Click <a href='staff.php?action=announce'>here to add an announcement</a> or <a href='staff_special.php?action=massmailer'>here to send a mass mail</a> explaining why.";
-    stafflog_add("Credited all users \${$_POST['money']} and/or {$_POST['crystals']} crystals.");
+    stafflog_add("Credited all users \${$_POST['money']} and/or {$_POST['crystals']} Recoplas.");
 }
 
 function reports_view()

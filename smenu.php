@@ -88,7 +88,7 @@ print "
 <div class='navipart'><div class='navitop'><p><h2><strong>&nbsp;&nbsp; Logs</strong></h2></p></div><div class='navi_mid'><ul>
 <li> <a class='link1' href='staff_logs.php?action=atklogs'>Attack Logs</a></li>
 <li> <a class='link1' href='staff_logs.php?action=cashlogs'>Cash Xfer Logs</a></li>
-<li> <a class='link1' href='staff_logs.php?action=cryslogs'>Crystal Xfer Logs</a></li>
+<li> <a class='link1' href='staff_logs.php?action=cryslogs'>Recopla Xfer Logs</a></li>
 <li> <a class='link1' href='staff_logs.php?action=banklogs'>Bank Xfer Logs</a></li>
 <li> <a class='link1' href='staff_logs.php?action=itmlogs'>Item Xfer Logs</a></li>";
 if ($ir['user_level'] == 2) {

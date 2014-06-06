@@ -43,7 +43,7 @@ if (!$ir['donatordays']) {
 <li>- Gain Brave twice as quick</li>
 <li>- Different Color Name</li>
 <li>- Special Will Package</li>
-<li>- Special Money and Crystal Package</li> 
+<li>- Special Money and Recopla Package</li> 
 <li>- Add Friend/Enemy</li>
 <li>- And Much Much More</li>
 </ul>                                
@@ -74,7 +74,7 @@ print"
 </tr>";
 $exp = (int)($ir['exp'] / $ir['exp_needed'] * 100);
 print "<tr>
-<td width=50%><b>Name:</b> {$ir['username']}</td><td><b>Crystals:</b> {$cm}</td></tr><tr>
+<td width=50%><b>Name:</b> {$ir['username']}</td><td><b>Recoplas:</b> {$cm}</td></tr><tr>
 <td><b>Level:</b> {$ir['level']}</td>
 <td><b>Exp:</b> {$exp}%</td></tr><tr>
 <td><b>Money:</b> $fm</td>

@@ -104,7 +104,7 @@ Registration CAPTCHA: <select name='regcap_on' type='dropdown'>";
             }
         }
         print "</select><br />
-Send Crystals: <select name='sendcrys_on' type='dropdown'>";
+Send Recoplas: <select name='sendcrys_on' type='dropdown'>";
         $opt = array(
             "1" => "On",
             "0" => "Off"
@@ -130,9 +130,9 @@ Bank Xfers: <select name='sendbank_on' type='dropdown'>";
             }
         }
         print "</select><br />
-Energy Refill Price (crystals): <input type='text' STYLE='color: black;  background-color: white;' name='ct_refillprice' value='{$set['ct_refillprice']}' /><br />
-IQ per crystal: <input type='text' STYLE='color: black;  background-color: white;' name='ct_iqpercrys' value='{$set['ct_iqpercrys']}' /><br />
-Money per crystal: <input type='text' STYLE='color: black;  background-color: white;' name='ct_moneypercrys' value='{$set['ct_moneypercrys']}' /><br />
+Energy Refill Price (Recoplas): <input type='text' STYLE='color: black;  background-color: white;' name='ct_refillprice' value='{$set['ct_refillprice']}' /><br />
+IQ per Recopla: <input type='text' STYLE='color: black;  background-color: white;' name='ct_iqpercrys' value='{$set['ct_iqpercrys']}' /><br />
+Money per Recopla: <input type='text' STYLE='color: black;  background-color: white;' name='ct_moneypercrys' value='{$set['ct_moneypercrys']}' /><br />
 Will Potion Item: " . item_dropdown($c, "willp_item", $set['willp_item']) . "<br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Update Settings' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     }

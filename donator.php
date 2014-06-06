@@ -28,7 +28,7 @@ print <<<EOF
 If you become a donator to {$set['game_name']}, you will receive (each time you donate):<br />
 <b>1st Offer:</b><ul>
 <li>\$5,000 game money</li>
-<li>50 crystals</li>
+<li>50 Recoplas</li>
 <li>50 IQ, the hardest stat to get in the game!</li>
 <li>30 days Donator Status: Green name + cross next to your name</li>
 <li><b>NEW!</b> Friend and Black Lists</li>
@@ -51,7 +51,7 @@ If you become a donator to {$set['game_name']}, you will receive (each time you 
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 </form>
 <b>2nd Offer:</b><ul>
-<li>100 crystals</li>
+<li>100 Recoplas</li>
 <li>30 days Donator Status: Green name + cross next to your name</li>
 <li><b>NEW!</b> Friend and Black Lists</li>
 <li><b>NEW!</b> 17% Energy every 5 mins instead of 8%</li></ul>
@@ -96,7 +96,7 @@ If you become a donator to {$set['game_name']}, you will receive (each time you 
 </form>
 <b>4th Offer ($5.00 pack):</b><ul>
 <li>\$15,000 game money</li>
-<li>75 crystals</li>
+<li>75 Recoplas</li>
 <li>80 IQ, the hardest stat to get in the game!</li>
 <li>55 days Donator Status: Green name + cross next to your name</li>
 <li><b>NEW!</b> Friend and Black Lists</li>
@@ -120,7 +120,7 @@ If you become a donator to {$set['game_name']}, you will receive (each time you 
 </form>
 <b>5th Offer ($10.00 pack):</b><ul>
 <li>\$35,000 game money</li>
-<li>160 crystals</li>
+<li>160 Recoplas</li>
 <li>180 IQ, the hardest stat to get in the game!</li>
 <li>A free Rifle valued at \$25,000</li>
 <li>115 days Donator Status: Green name + cross next to your name</li>

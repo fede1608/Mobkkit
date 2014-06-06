@@ -90,7 +90,7 @@ The user will receive the benefits of one 30-day donator pack.<br />
 <form action='staff_special.php?action=givedpsub' method='post'>
 User: " . user_dropdown($c, 'user') . "<br />
 <input type='radio' name='type' value='1' /> Pack 1 (Standard)<br />
-<input type='radio' name='type' value='2' /> Pack 2 (Crystals)<br />
+<input type='radio' name='type' value='2' /> Pack 2 (Recoplas)<br />
 <input type='radio' name='type' value='3' /> Pack 3 (IQ)<br />
 <input type='radio' name='type' value='4' /> Pack 4 (5.00)<br />
 <input type='radio' name='type' value='5' /> Pack 5 (10.00)<br />

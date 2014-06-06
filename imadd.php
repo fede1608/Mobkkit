@@ -72,7 +72,7 @@ Invalid Item ID                 <br><br>
 Adding an item to the item market...
 <form action='imadd.php' method='get'>
 <input type='hidden' name='ID' value='{$_GET['ID']}' />
-Price: <input type='text' STYLE='color: black;  background-color: white;' name='price' value='0' /> <select name='currency' type='dropdown'><option value='money'>Money</option><option value='crystals'>Crystals</option></select><br />
+Price: <input type='text' STYLE='color: black;  background-color: white;' name='price' value='0' /> <select name='currency' type='dropdown'><option value='money'>Money</option><option value='crystals'>Recoplas</option></select><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Add' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     }
 }

@@ -24,7 +24,7 @@ $_POST['crystals'] = abs((int)$_POST['crystals']);
 if (!((int)$_GET['ID'])) {
     print "Invalid User ID";
 } else if ($_GET['ID'] == $userid) {
-    print "Haha, what does sending crystals to yourself do anyway?";
+    print "Haha, what does sending Recoplas to yourself do anyway?";
 } else {
     if ((int)$_POST['crystals']) {
         if ($_POST['crystals'] > $ir['crystals']) {
@@ -32,7 +32,7 @@ if (!((int)$_GET['ID'])) {
         } else {
             $db->query("UPDATE users SET crystals=crystals-{$_POST['crystals']} WHERE userid=$userid");
             $db->query("UPDATE users SET crystals=crystals+{$_POST['crystals']} WHERE userid={$_GET['ID']}");
-            print "You sent {$_POST['crystals']} crystals to ID {$_GET['ID']}.";
+            print "You sent {$_POST['crystals']} Recoplas to ID {$_GET['ID']}.";
             event_add($_GET['ID'], "You received {$_POST['crystals']} crystals from {$ir['username']}.", $c);
             $it = $db->query("SELECT u.*,us.* FROM users u LEFT JOIN userstats us ON u.userid=us.userid WHERE u.userid={$_GET['ID']}");
             $er = $db->fetch_row($it);
@@ -43,14 +43,14 @@ if (!((int)$_GET['ID'])) {
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'>Sending Crystals</h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'>Sending Recoplas</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 
-You are sending crystals to ID: <b>{$_GET['ID']}</b>.
+You are sending Recoplas to ID: <b>{$_GET['ID']}</b>.
 <br>You have <b>" . number_format($ir['crystals']) . "</b> crystals you can send.
 <form action='sendcrys.php?ID={$_GET['ID']}' method='post'>
-Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
+Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Send' /></form>";
         print "<h3>Latest 5 Transfers</h3>
 <table width=75% class=table border=2> <tr style='background:gray'>  <th>Time</th> <th>User From</th> <th>User To</th> <th>Amount</th> </tr>";
@@ -61,7 +61,7 @@ Crystals: <input type='text' STYLE='color: black;  background-color: white;' nam
             } else {
                 $m = "";
             }
-            print "<tr> <td>" . date("F j, Y, g:i:s a", $r['cxTIME']) . "</td><td>{$r['sender']} [{$r['cxFROM']}] </td><td>{$r['sent']} [{$r['cxTO']}] </td> <td> {$r['cxAMOUNT']} crystals</td> </tr>";
+            print "<tr> <td>" . date("F j, Y, g:i:s a", $r['cxTIME']) . "</td><td>{$r['sender']} [{$r['cxFROM']}] </td><td>{$r['sent']} [{$r['cxTO']}] </td> <td> {$r['cxAMOUNT']} Recoplas</td> </tr>";
         }
         print "</table></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>  ";
     }

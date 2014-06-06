@@ -110,7 +110,7 @@ function admin_index()
 [<a href='secpanel.php?action=unfedform'>Unjail User</a>]<br />
 [<a href='secpanel.php?action=mailform'>Mail Ban User</a>]<br />
 [<a href='secpanel.php?action=invbeg'>View User Inventory</a>]<br />
-[<a href='secpanel.php?action=creditform'>Credit User Money/Crystals</a>]<br /> 
+[<a href='secpanel.php?action=creditform'>Credit User Money/Recoplas</a>]<br /> 
 [<a href='secpanel.php?action=ipform'>Ip Search</a>]<br />
 [<a href='secpanel.php?action=reportsview'>Player Reports</a>]<br />
 <br />
@@ -267,10 +267,10 @@ function credit_user_form()
 {
     global $ir, $c, $h, $userid;
     print "<h3>Crediting User</h3>
-You can give a user money/crystals.<br />
+You can give a user money/Recoplas.<br />
 <form action='secpanel.php?action=creditsub' method='post'>
 User: " . user_dropdown($c, 'user') . "<br />
-Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /> Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
+Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /> Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Credit User' /></form>";
 }
 

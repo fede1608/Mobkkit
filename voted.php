@@ -68,7 +68,7 @@ if (mysql_num_rows($q) > 0) {
         if ($reward > 1) {
             event_add($userid, "Thank you for voting! You have receieved $reward crystals!", $c);
         } else {
-            event_add($userid, "Thank you for voting! You have receieved $reward crystal!", $c);
+            event_add($userid, "Thank you for voting! You have receieved $reward Recoplas!", $c);
         }
         mysql_query("UPDATE users SET crystals=crystals+$reward WHERE userid=$userid", $c);
     }

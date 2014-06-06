@@ -191,7 +191,7 @@ if (!$_GET['u']) {
 
 
 <div class='cap_txtpart'>
-    <div class='cap_txt1'>Crystals:</div>
+    <div class='cap_txt1'>Recoplas:</div>
     <div class='cap_txt2'>{$r['crystals']}</div>
 
 </div>
@@ -271,7 +271,7 @@ if (!$_GET['u']) {
 <div class='user_imgpart'>
     <div class='user_leftimgpart'>
 
-        <div class='user_leftimg1'> <div align='left'> <a href='sendcash.php?ID={$r['userid']}'>Send Cash</a></div> </div> <div class='user_leftimg2'> <div align='left'> <a href='sendcrys.php?ID={$r['userid']}'>Send Crystals</a></div> </div> <div class='user_leftimg3'>  <div align='centre'> <a href='attack.php?ID={$r['userid']}'>Attack</a> </div> </div> <div class='user_leftimg4'><div align='left'><a href='friendslist.php?action=add&ID={$r['userid']}'>Add Friend</a></div></div><div class='user_rightimg5'><div align='left'><a href='mailbox.php?action=compose&ID={$r['userid']}'>Mail User</a></div></div>
+        <div class='user_leftimg1'> <div align='left'> <a href='sendcash.php?ID={$r['userid']}'>Send Cash</a></div> </div> <div class='user_leftimg2'> <div align='left'> <a href='sendcrys.php?ID={$r['userid']}'>Send Recoplas</a></div> </div> <div class='user_leftimg3'>  <div align='centre'> <a href='attack.php?ID={$r['userid']}'>Attack</a> </div> </div> <div class='user_leftimg4'><div align='left'><a href='friendslist.php?action=add&ID={$r['userid']}'>Add Friend</a></div></div><div class='user_rightimg5'><div align='left'><a href='mailbox.php?action=compose&ID={$r['userid']}'>Mail User</a></div></div>
     </div>
     
     <div class='user_rightimgpart'>

@@ -172,7 +172,7 @@ function search_streets()
     } else if ($_GET['search'] == 6) {
         if ($rand == 1) {
             $db->query("UPDATE users SET `crystals`=`crystals`+" . $randcrystals . " WHERE userid=$userid");
-            echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching " . $cityname . " You fell down a hole and found crystal mine , You took " . number_format($randcrystals);
+            echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching " . $cityname . " You fell down a hole and found Recoplas mine , You took " . number_format($randcrystals);
         } else {
             $Time = mt_rand(2, 30);
             echo "<span style='color:red;font-weight:700;'>Unlucky!</span><br />While searching " . $cityname . " a police officer arrested you.";

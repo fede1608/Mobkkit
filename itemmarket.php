@@ -57,7 +57,7 @@ function imarket_index()
         if ($r['imCURRENCY'] == "money") {
             $price = "\$" . number_format($r['imPRICE']);
         } else {
-            $price = number_format($r['imPRICE']) . " crystals";
+            $price = number_format($r['imPRICE']) . " Recoplas";
         }
         if ($r['imADDER'] == $userid) {
             $link = "[<a href='itemmarket.php?action=remove&ID={$r['imID']}'>Remove</a>]";
@@ -117,9 +117,9 @@ function item_buy()
         print "You bought the {$r['itmname']} from the market for \$" . number_format($r['imPRICE']) . "
 <br/><a href='itemmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
     } else {
-        event_add($r['imADDER'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought your {$r['itmname']} item from the market for " . number_format($r['imPRICE']) . " crystals.", $c);
-        $db->query("INSERT INTO imbuylogs VALUES ('', {$r['imITEM']}, {$r['imADDER']}, $userid,  {$r['imPRICE']}, {$r['imID']}, $i, unix_timestamp(), '{$ir['username']} bought a {$r['itmname']} from the item market for {$r['imPRICE']} crystals from user ID {$r['imADDER']}')");
-        print "You bought the {$r['itmname']} from the market for " . number_format($r['imPRICE']) . " crystals.<br />
+        event_add($r['imADDER'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought your {$r['itmname']} item from the market for " . number_format($r['imPRICE']) . " Recoplas.", $c);
+        $db->query("INSERT INTO imbuylogs VALUES ('', {$r['imITEM']}, {$r['imADDER']}, $userid,  {$r['imPRICE']}, {$r['imID']}, $i, unix_timestamp(), '{$ir['username']} bought a {$r['itmname']} from the item market for {$r['imPRICE']} Recoplas from user ID {$r['imADDER']}')");
+        print "You bought the {$r['itmname']} from the market for " . number_format($r['imPRICE']) . " Recoplas.<br />
 <a href='itemmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
     }
 }
@@ -149,7 +149,7 @@ function item_gift1()
 User to give gift to: " . user_dropdown($c, 'user') . "<br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Buy Item and Send Gift' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     } else {
-        print "Buying the <b>{$r['itmname']}</b> for " . number_format($r['imPRICE']) . " crystals as a gift...<br />
+        print "Buying the <b>{$r['itmname']}</b> for " . number_format($r['imPRICE']) . " Recoplas as a gift...<br />
 <form action='itemmarket.php?action=gift2' method='post'>
 <input type='hidden' name='ID' value='{$_GET['ID']}' />
 User to give gift to: " . user_dropdown($c, 'user') . "<br />
@@ -189,12 +189,12 @@ function item_gift2()
         print "You bought the {$r['itmname']} from the market for \$" . number_format($r['imPRICE']) . " and sent the gift to $uname.<br />
 <a href='itemmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     } else {
-        event_add($r['imADDER'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought your {$r['itmname']} item from the market for " . number_format($r['imPRICE']) . " crystals.", $c);
+        event_add($r['imADDER'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought your {$r['itmname']} item from the market for " . number_format($r['imPRICE']) . " Recoplas.", $c);
         event_add($_POST['user'], "<a href='viewuser.php?u=$userid'>{$ir['username']}</a> bought you a {$r['itmname']} from the item market as a gift.", $c);
         $u = $db->query("SELECT username FROM users WHERE userid={$_POST['user']}");
         $uname = $db->fetch_single($u);
-        $db->query("INSERT INTO imbuylogs VALUES ('', {$r['imITEM']}, {$r['imADDER']}, $userid,  {$r['imPRICE']}, {$r['imID']}, $i, unix_timestamp(), '{$ir['username']} bought a {$r['itmname']} from the item market for {$r['imPRICE']} crystals from user ID {$r['imADDER']} as a gift for $uname [{$_POST['user']}]')");
-        print "You bought the {$r['itmname']} from the market for " . number_format($r['imPRICE']) . " crystals and sent the gift to $uname.<br />
+        $db->query("INSERT INTO imbuylogs VALUES ('', {$r['imITEM']}, {$r['imADDER']}, $userid,  {$r['imPRICE']}, {$r['imID']}, $i, unix_timestamp(), '{$ir['username']} bought a {$r['itmname']} from the item market for {$r['imPRICE']} Recoplas from user ID {$r['imADDER']} as a gift for $uname [{$_POST['user']}]')");
+        print "You bought the {$r['itmname']} from the market for " . number_format($r['imPRICE']) . " Recoplas and sent the gift to $uname.<br />
 <a href='itemmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     }
 }

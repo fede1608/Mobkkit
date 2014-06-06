@@ -54,7 +54,7 @@ print "
 <a href='shops.php'>City Shops</a><br />
 <a href='playershops.php'>Player Shops</a><br /> 
 <a href='itemmarket.php'>Item Market</a><br />
-<a href='cmarket.php'>Crystal Market</a><br />
+<a href='cmarket.php'>Recopla Market</a><br />
 </td>
 <td valign='top'>
 <a href='business_view.php'>Business Listings</a><br /> 
@@ -103,7 +103,7 @@ print"
 <a href='battle_ladder.php'>Battle Ladder</a><br /> 
 <a href='battletent.php'>Battle Tent</a><br />
 <a href='whorehouse.php'>Brothel</a><br />    
-<a href='crystaltemple.php'>Crystal Temple</a><br />
+<a href='crystaltemple.php'>Recopla Temple</a><br />
 <a href='streets.php'>Search Streets</a><br />
 <a href='attacklist.php'>Player Attack List</a><br />
 <a href='cityusers.php'>Players in your City</a><br />
@@ -147,7 +147,7 @@ print "
 
 
 This is your referal link: http://{$domain}/signup.php?REF=$userid <br><br />
-Every signup from this link earns you two valuable crystals!";
+Every signup from this link earns you two valuable Recoplas!";
 $h->endpage();
 ?>
 

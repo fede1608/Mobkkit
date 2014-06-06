@@ -106,7 +106,7 @@ Gang Name: {$r['gangNAME']}<br />
 Gang Description: {$r['gangDESC']}<br />
 Prefix: {$r['gangPREF']}<br />
 Money: {$r['gangMONEY']}<br />
-Crystals: {$r['gangCRYSTALS']}<br />
+Recoplas: {$r['gangCRYSTALS']}<br />
 Respect: {$r['gangRESPECT']}<br />
 President: {$r['gangPRESIDENT']}<br />
 Vice-President: {$r['gangVICEPRES']}<br />
@@ -157,7 +157,7 @@ function admin_gang_credit()
     if ($submit && $gang && ($money != 0 || $crystals != 0) && $reason) {
         $db->query("UPDATE gangs SET gangMONEY=gangMONEY+$money, gangCRYSTALS=gangCRYSTALS+$crystals WHERE gangID = $gang");
         print "The gang was successfully credited.";
-        stafflog_add("{$ir['username']} credited gang ID {$gang} with {$money} money and/or {$crystals} crystals with the reason {$reason}");
+        stafflog_add("{$ir['username']} credited gang ID {$gang} with {$money} money and/or {$crystals} Recoplas with the reason {$reason}");
 
     } else if ($gang && ($money != 0 || $crystals != 0)) {
         $q = $db->query("SELECT gangNAME FROM gangs WHERE gangID = $gang");
@@ -165,7 +165,7 @@ function admin_gang_credit()
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'> You are crediting Gang ID: $gang with \$$money and $crystals crystals</h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'> You are crediting Gang ID: $gang with \$$money and $crystals Recoplas</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 <form action='staff_gangs.php?action=gcredit' method='post'>
@@ -200,7 +200,7 @@ Select Gang: <select name='gang' type='dropdown'>";
 
 value='1000' /></td>
 </tr> <tr>
-<td align='right'>Crystals:</td> <td align='left'><input type='text' STYLE='color: black;  background-color: white;' name='crystals' 
+<td align='right'>Recoplas:</td> <td align='left'><input type='text' STYLE='color: black;  background-color: white;' name='crystals' 
 
 value='10' /></td>
 </tr> <tr>
@@ -444,7 +444,7 @@ Editing the gang: {$r['gangNAME']}<br />
 <td align=left><input type='text' STYLE='color: black;  background-color: white;' name='money' value='{$r['gangMONEY']}' /></td>
 </tr>
 <tr>
-<td align=right>Crystals:</td>
+<td align=right>Recoplas:</td>
 <td align=left><input type='text' STYLE='color: black;  background-color: white;' name='crystals' value='{$r['gangCRYSTALS']}' /></td>
 </tr>
 <tr>

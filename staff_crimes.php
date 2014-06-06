@@ -80,7 +80,7 @@ Name: <input type='text' STYLE='color: black;  background-color: white;' name='n
 Brave Cost: <input type='text' STYLE='color: black;  background-color: white;' name='brave' /><br />
 Success % Formula: <input type='text' STYLE='color: black;  background-color: white;' name='percform' value='((WILL*0.8)/2.5)+(LEVEL/4)' /><br />
 Success Money: <input type='text' STYLE='color: black;  background-color: white;' name='money' /><br />
-Success Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crys' /><br />
+Success Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crys' /><br />
 Success Item: " . item2_dropdown($c, 'item') . "<br />
 Group: " . crimegroup_dropdown($c, 'group') . "<br />
 Initial Text: <textarea rows=4 cols=40 name='itext'  /></textarea><br />
@@ -143,7 +143,7 @@ Name: <input type='text' STYLE='color: black;  background-color: white;' name='c
 Brave Cost: <input type='text' STYLE='color: black;  background-color: white;' name='crimeBRAVE' value='{$itemi['crimeBRAVE']}' /><br />
 Success % Formula: <input type='text' STYLE='color: black;  background-color: white;' name='crimePERCFORM' value='{$itemi['crimePERCFORM']}' /><br />
 Success Money: <input type='text' STYLE='color: black;  background-color: white;' name='crimeSUCCESSMUNY' value='{$itemi['crimeSUCCESSMUNY']}' /><br />
-Success Crystals: <input type='text' STYLE='color: black;  background-color: white;' name='crimeSUCCESSCRYS' value='{$itemi['crimeSUCCESSCRYS']}' /><br />
+Success Recoplas: <input type='text' STYLE='color: black;  background-color: white;' name='crimeSUCCESSCRYS' value='{$itemi['crimeSUCCESSCRYS']}' /><br />
 Success Item: " . item2_dropdown($c, 'crimeSUCCESSITEM', $itemi['crimeSUCCESSITEM']) . "<br />
 Group: " . crimegroup_dropdown($c, 'crimeGROUP', $itemi['crimeGROUP']) . "<br />
 Initial Text: <textarea rows=4 cols=40 name='crimeITEXT'  />{$itemi['crimeITEXT']}'</textarea><br />

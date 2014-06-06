@@ -152,7 +152,7 @@ class GangVars
 
     var $money_name = 'Money';
 
-    var $crystals_name = 'Crystals';
+    var $crystals_name = 'Recoplas';
 
     /**
      * An array of all tabs that will be shown to users.

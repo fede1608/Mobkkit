@@ -117,8 +117,8 @@ function hof_money()
 function hof_crystals()
 {
     global $db, $ir, $c, $userid, $myf;
-    print "Showing the 20 users with the highest amount of crystals<br />
-<table width=75% cellspacing=1 class='table'><tr style='background:gray'> <th>Pos</th> <th>User</th> <th>Crystals</th> </tr>";
+    print "Showing the 20 users with the highest amount of Recoplas<br />
+<table width=75% cellspacing=1 class='table'><tr style='background:gray'> <th>Pos</th> <th>User</th> <th>Recoplas</th> </tr>";
     $q = $db->query("SELECT u.*,g.* FROM users u LEFT JOIN gangs g ON g.gangID=u.gang WHERE u.user_level != 0 $myf ORDER BY crystals DESC,userid ASC LIMIT 20");
     $p = 0;
     while ($r = $db->fetch_row($q)) {

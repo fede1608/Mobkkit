@@ -19,7 +19,7 @@ while ($t = mysql_fetch_array($getshopitems)) {
 
 
 if ($total == $us['size']) {
-    die("Sorry, but your shop is full!<br><a href=myshop.php>You will need to upgrade your shop's size.");
+    die(__("Sorry, but your shop is full!<br><a href=myshop.php>You will need to upgrade your shop's size."));
 }
 
 
@@ -31,7 +31,7 @@ if ($_GET['price']) {
     }
     $r = mysql_fetch_array($q);
     if (100 == 500) {
-        die("This item still belongs to your gang, you can't sell it.");
+        die(__("This item still belongs to your gang, you can't sell it."));
     } else {
         $_GET['quantity'] = mysql_real_escape_string($_GET['quantity']);
         if ($_GET['quantity'] > 1) {
@@ -41,16 +41,16 @@ if ($_GET['price']) {
         }
 
         if ($quantity > $r['inv_qty']) {
-            die("<center>You don't have this many of that item!</center>");
+            die(__("<center>You don't have this many of that item!</center>"));
         }
 
         if ($quantity < 1) {
-            die("<center>A quantity of less than one? <br>Well that doesn't make much sense now does it?</center>");
+            die(__("<center>A quantity of less than one? <br>Well that doesn't make much sense now does it?</center>"));
         }
 
         $newquant = $total + $quantity;
         if ($newquant > $us['size']) {
-            die("Sorry, but you don't have enough room in your shop.<br><a href=myshop.php>click here to manage your shop</a>");
+            die(__("Sorry, but you don't have enough room in your shop.<br><a href=myshop.php>click here to manage your shop</a>"));
         }
 
         $checkforitem =
@@ -68,7 +68,7 @@ if ($_GET['price']) {
         $db->query("UPDATE inventory SET inv_qty=inv_qty-$quantity WHERE inv_id={$_GET['ID']}");
 
         $db->query("DELETE FROM inventory WHERE inv_qty=0", $c);
-        print "You have put this item in your shop.";
+        print __("You have put this item in your shop.");
 
 
     }
@@ -76,13 +76,13 @@ if ($_GET['price']) {
     $q =
         $db->query("SELECT * FROM inventory WHERE inv_id={$_GET['ID']} and inv_userid=$userid");
     if (mysql_num_rows($q) == 0) {
-        print "Invalid Item ID";
+        print __("Invalid Item ID");
     } else {
         $r = mysql_fetch_array($q);
 
         if ($r['inv_qty'] > 1) {
-            $quantask = "Quantity: <input type='text' name='quantity' value='1'><br>";
-            $quanttell = "You have <b>{$r['inv_qty']}</b> of this item.";
+            $quantask = __("Quantity: <input type='text' name='quantity' value='1'><br>");
+            $quanttell = sprintf(__("You have <b>%d</b> of this item."),$r['inv_qty']);
         }
 
 
@@ -90,14 +90,14 @@ if ($_GET['price']) {
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'> Putting item in your shop</h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'> ".__("Putting item in your shop")."</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 
 $quanttell
 <form action='addtoshop.php' method='get'>
 <input type='hidden' name='ID' value='{$_GET['ID']}' />
-Price: \$<input type='text' STYLE='color: black;  background-color: white;' name='price' value='0' /><br />
+".__("Price").": \$<input type='text' STYLE='color: black;  background-color: white;' name='price' value='0' /><br />
 $quantask
 <input type='submit' STYLE='color: black;  background-color: white;' value='Put in Shop' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
     }

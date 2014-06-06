@@ -80,7 +80,7 @@ Stat: <select name='effect1stat' type='dropdown'>
 <option value='hospital'>Hospital Time</option>
 <option value='jail'>Jail Time</option>
 <option value='money'>Money</option>
-<option value='crystals'>Crystals</option>
+<option value='crystals'>Recoplas</option>
 <option value='cdays'>Education Days Left</option>
 <option value='bankmoney'>Bank money</option>
 <option value='cybermoney'>Cyber money</option>
@@ -108,7 +108,7 @@ Stat: <select name='effect2stat' type='dropdown'>
 <option value='hospital'>Hospital Time</option>
 <option value='jail'>Jail Time</option>
 <option value='money'>Money</option>
-<option value='crystals'>Crystals</option>
+<option value='crystals'>Recoplas</option>
 <option value='cdays'>Education Days Left</option>
 <option value='bankmoney'>Bank money</option>
 <option value='cybermoney'>Cyber money</option>
@@ -136,7 +136,7 @@ Stat: <select name='effect3stat' type='dropdown'>
 <option value='hospital'>Hospital Time</option>
 <option value='jail'>Jail Time</option>
 <option value='money'>Money</option>
-<option value='crystals'>Crystals</option>
+<option value='crystals'>Recoplas</option>
 <option value='cdays'>Education Days Left</option>
 <option value='bankmoney'>Bank money</option>
 <option value='cybermoney'>Cyber money</option>
@@ -364,7 +364,7 @@ Item Sell Value: <input type='text' STYLE='color: black;  background-color: whit
         "hospital" => "Hospital Time",
         "jail" => "Jail Time",
         "money" => "Money",
-        "crystals" => "Crystals",
+        "crystals" => "Recoplas",
         "cdays" => "Education Days Left",
         "bankmoney" => "Bank money",
         "cybermoney" => "Cyber money",
