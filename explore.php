@@ -1,29 +1,30 @@
-<?php    
+<?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
 include "globals.php";
-$tresder=(int) rand(100,999);
+$tresder = (int)rand(100, 999);
 global $db, $ir, $userid, $h, $db;
-$cityname = $db->fetch_single($db->query("SELECT cityname FROM cities WHERE cityid = ".$ir['location']));
-$citycount = $db->fetch_single($db->query("SELECT COUNT(*) FROM users WHERE location = ".$ir['location'])); 
-if($ir['jail'] or $ir['hospital']) { print "This page cannot be accessed while in jail or hospital.";
+$cityname = $db->fetch_single($db->query("SELECT cityname FROM cities WHERE cityid = " . $ir['location']));
+$citycount = $db->fetch_single($db->query("SELECT COUNT(*) FROM users WHERE location = " . $ir['location']));
+if ($ir['jail'] or $ir['hospital']) {
+    print "This page cannot be accessed while in jail or hospital.";
 
-$h->endpage(); 
-exit; 
+    $h->endpage();
+    exit;
 }
 print "
 
@@ -60,9 +61,8 @@ print "
 <a href='travel.php'>Travel Agency</a><br />
 <a href='estate.php'>Real Estate</a><br />
 <a href='bank.php'>City Bank</a>";
-if($ir['level'] >= 5)
-{
-print "<br />
+if ($ir['level'] >= 5) {
+    print "<br />
 <a href='cyberbank.php'>Cyber Bank</a><br />";
 }
 print "</td>
@@ -71,9 +71,8 @@ print "</td>
 <a href='magicslots.php'>Magic Slots</a><br />
 <a href='roulette.php?tresde=$tresder'>Roulette</a><br />
 <a href='lucky.php'>Lucky Boxes</a>  ";
-if($ir['location'] == 5)
-{
-print "<br />
+if ($ir['location'] == 5) {
+    print "<br />
 <a href='slotsmachine3.php'>Super Slots</a><br />";
 }
 print "</td></tr>
@@ -89,10 +88,9 @@ print "</td></tr>
 <a href='viewuser.php?u={$ir['userid']}'>Your Profile</a><br />
 <a href='business_home.php'>Your Business</a><br />  ";
 
-$checkforshop=$db->query("select * from usershops where userid=$userid");
-if(mysql_num_rows($checkforshop)!=0)
-{
-print"<a href='myshop.php'>Your Shop</a> <br/>";
+$checkforshop = $db->query("select * from usershops where userid=$userid");
+if (mysql_num_rows($checkforshop) != 0) {
+    print"<a href='myshop.php'>Your Shop</a> <br/>";
 }
 print"
 <a href='inventory.php'>Inventory</a><br />
@@ -142,11 +140,7 @@ print"
 ";
 
 
-
-
-
-
-print "  
+print "
 
 
 </td></tr></table> </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>

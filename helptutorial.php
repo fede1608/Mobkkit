@@ -2,8 +2,7 @@
 include 'globals.php';
 
 
-
-print "<h2><p id='contents'><u>{$set['game_name']} Help Tutorial</u></p></h2>  
+print "<h2><p id='contents'><u>{$set['game_name']} Help Tutorial</u></p></h2>
 <table align='left' width=20%'>
 <td style='background-color: #000000; border: 1px #FFFFFF solid; padding: 8px;'>
 <ul>

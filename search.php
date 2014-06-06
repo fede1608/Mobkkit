@@ -5,13 +5,11 @@ include "globals.php";
 $sql = sprintf("SELECT * FROM search WHERE userid = %d ", $ir['userid']);
 
 $q1 = mysql_query($sql);
-if(mysql_num_rows($q1) > 0)
-{
-$p = $db->fetch_row($q1);
+if (mysql_num_rows($q1) > 0) {
+    $p = $db->fetch_row($q1);
 
 
-
-print"
+    print"
 
 <div class='icolumn2' id='mainContentDiv'>
 <div class='searchpage'>
@@ -44,55 +42,47 @@ print"
 <tr><td>Location: <Select name=location type=dropdown value={$p['location']}>    
 ";
 
-$sq = sprintf("SELECT cityname FROM cities WHERE cityid = %d ", $p['location']);
+    $sq = sprintf("SELECT cityname FROM cities WHERE cityid = %d ", $p['location']);
 
-$q2 = mysql_query($sq);
-$v = $db->fetch_row($q2);
-print"<option value={$p['location']} >{$v['cityname']}</option>";
+    $q2 = mysql_query($sq);
+    $v = $db->fetch_row($q2);
+    print"<option value={$p['location']} >{$v['cityname']}</option>";
 
-$s = sprintf("SELECT cityid, cityname FROM cities WHERE cityid != %d ", $p['location']);
+    $s = sprintf("SELECT cityid, cityname FROM cities WHERE cityid != %d ", $p['location']);
 
-$q = mysql_query($s);
-
-
-while($r=$db->fetch_row($q))
-{ 
-print "<option value={$r['cityid']}>{$r['cityname']}</option>";
-}
+    $q = mysql_query($s);
 
 
-print"</select>  ";
+    while ($r = $db->fetch_row($q)) {
+        print "<option value={$r['cityid']}>{$r['cityname']}</option>";
+    }
 
 
+    print"</select>  ";
 
-print"
+
+    print"
 
 </td><td>Status: 
 <select name=online type=dropdown value={$p['online']}>";
-if($p['online'] !='online')
-{
+    if ($p['online'] != 'online') {
 
-print"<option value=0>Offline</option><option value=online>Online</option>";
-}
-else
-{
+        print"<option value=0>Offline</option><option value=online>Online</option>";
+    } else {
 
-print"<option value=online>Online</option><option value=0>Offline</option>";
-}
-print"
+        print"<option value=online>Online</option><option value=0>Offline</option>";
+    }
+    print"
 </select></td>
 </tr>";
 
-print"
+    print"
 
 
 <tr><td colspan='2'><br /><input type='submit' STYLE='color: black;  background-color: white;' name='search' value='Search'>     <input type='submit' STYLE='color: black;  background-color: white;' name='save' value='Search and Save'>     <input type='submit' STYLE='color: black;  background-color: white;' name='clear' value='Clear Saved Search'></form></td></tr></table></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
 
-}
-
-else
-{
-print"
+} else {
+    print"
 
 <div class='icolumn2' id='mainContentDiv'>
 <div class='searchpage'>
@@ -123,15 +113,14 @@ print"
 <td><font color=red>* </font><font color=green size=4><b>$</b></font><input type=text STYLE='color: black;  background-color: white;' name=moneymin value=1></td></tr>
 <tr><td colspan='2'>Misc. Search criteria</td></tr>
 <tr><td>Location: <Select name=location type=dropdown>";
-print"<option value=0 selected >select</option>";
-$q=$db->query("Select * from cities");
-while($r=$db->fetch_row($q))
-{ 
-print "<option value={$r['cityid']}>{$r['cityname']}</option>";
-}
+    print"<option value=0 selected >select</option>";
+    $q = $db->query("Select * from cities");
+    while ($r = $db->fetch_row($q)) {
+        print "<option value={$r['cityid']}>{$r['cityname']}</option>";
+    }
 
 
-print"</select>  
+    print"</select>
 
 
 

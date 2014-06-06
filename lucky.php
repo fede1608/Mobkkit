@@ -1,19 +1,19 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
 include "globals.php";
 print "
@@ -26,41 +26,37 @@ print "
 </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> 
 
 ";
-if($_GET['open'])
-{
-if($ir['boxes_opened'] >= 5)
-{
-    
-print "
+if ($_GET['open']) {
+    if ($ir['boxes_opened'] >= 5) {
+
+        print "
 
 <div id='mainOutput' style='text-align: center; color: white;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
 
 Sorry, you have already opened 5 boxes today. Come back tomorrow.";
-$h->endpage(); 
-exit;
+        $h->endpage();
+        exit;
 
-}
-if($ir['money'] < 1000)
-{
-print"
+    }
+    if ($ir['money'] < 1000) {
+        print"
 
 <div id='mainOutput' style='text-align: center; color: white;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
 
 Sorry, it costs \$1,000 to open a box. Come back when you have enough.";
-$h->endpage(); 
-exit;
+        $h->endpage();
+        exit;
 
-}
-$num=rand(1, 5);
-$db->query("UPDATE users SET boxes_opened=boxes_opened+1, money=money-1000 WHERE userid=$userid");
-$ir['money']-=1000;
-switch($num)
-{
-case 1:
-$tokens=rand(1,5);
-print "
+    }
+    $num = rand(1, 5);
+    $db->query("UPDATE users SET boxes_opened=boxes_opened+1, money=money-1000 WHERE userid=$userid");
+    $ir['money'] -= 1000;
+    switch ($num) {
+        case 1:
+            $tokens = rand(1, 5);
+            print "
 
 <div id='mainOutput' style='text-align: center; color: green;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -69,11 +65,11 @@ margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'
 You have gained {$tokens} crystals.  
 
 ";
-$db->query("UPDATE users SET crystals=crystals+{$tokens} WHERE userid={$userid}");
-break;
-case 2:
-$money=rand(330, 3300);
-print "
+            $db->query("UPDATE users SET crystals=crystals+{$tokens} WHERE userid={$userid}");
+            break;
+        case 2:
+            $money = rand(330, 3300);
+            print "
 
 <div id='mainOutput' style='text-align: center; color: green;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -81,11 +77,11 @@ margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'
 You have gained \${$money} 
 
 ";
-$db->query("UPDATE users SET money=money+{$money} WHERE userid={$userid}");
-break;
-case 3:
-$stole=min(rand($ir['money']/10, $ir['money']/5), 5000);
-print "
+            $db->query("UPDATE users SET money=money+{$money} WHERE userid={$userid}");
+            break;
+        case 3:
+            $stole = min(rand($ir['money'] / 10, $ir['money'] / 5), 5000);
+            print "
 
 <div id='mainOutput' style='text-align: center; color: red;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -93,10 +89,10 @@ margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'
 You lost \${$stole} 
 
 ";
-$db->query("UPDATE users SET money=money-{$stole} WHERE userid={$userid}");
-break;
-case 4:
-print "
+            $db->query("UPDATE users SET money=money-{$stole} WHERE userid={$userid}");
+            break;
+        case 4:
+            print "
 
 <div id='mainOutput' style='text-align: center; color: red;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -104,9 +100,9 @@ margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'
 You found nothing !
 
 ";
-break;
-case 5:
-print "
+            break;
+        case 5:
+            print "
 
 <div id='mainOutput' style='text-align: center; color: red;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -115,19 +111,17 @@ You found nothing !
 
 
 ";
-break;
-}
-print "
+            break;
+    }
+    print "
 
 <br> </br>
 <b><a href='lucky.php?open=1'><font color='green'>Okay! Open Another</font></a></b> | 
 <b><a href='explore.php'><font color='red'>Enough! Back to Town</font></a></b>
 
 ";
-}
-else
-{
-print "
+} else {
+    print "
 
 <div id='mainOutput' style='text-align: center; color: white;  width: 550px; border: 1px solid #222222; height: 90px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>

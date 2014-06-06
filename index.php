@@ -1,29 +1,28 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Mafia Game Scripts Online Mafia Game
-| Software Author      : Mafia Game Scripts
-| Software Version     : Version 2.3.1 Build 2301
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Mafia Game Script End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Mafia Game Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Mafia Game Script . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Mafia Game Scripts Online Mafia Game
+ * | Software Author      : Mafia Game Scripts
+ * | Software Version     : Version 2.3.1 Build 2301
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Mafia Game Script End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Mafia Game Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Mafia Game Script . All rights reserved.
+ * |**************************************************************************************************/
 
-$housequery=1;
+$housequery = 1;
 
 
 include "globals.php";
 
-if(!$ir['donatordays'])
-{
+if (!$ir['donatordays']) {
 
-print "
+    print "
 
 <div class='icolumn2' id='mainContentDiv'>
 <div class='upgradepart'>
@@ -73,22 +72,19 @@ print"
 <tr>
 <th colspan=3></th>
 </tr>";
-$exp=(int)($ir['exp']/$ir['exp_needed']*100);
+$exp = (int)($ir['exp'] / $ir['exp_needed'] * 100);
 print "<tr>
 <td width=50%><b>Name:</b> {$ir['username']}</td><td><b>Crystals:</b> {$cm}</td></tr><tr>
 <td><b>Level:</b> {$ir['level']}</td>
 <td><b>Exp:</b> {$exp}%</td></tr><tr>
 <td><b>Money:</b> $fm</td>
 <td><b> Gang:</b> ";
-$qs=$db->query("SELECT * FROM gangs WHERE gangID={$ir['gang']}");
-$rs=$db->fetch_row($qs);
-if(!$db->num_rows($qs) ) 
-{
-print "No Gang";   
-}
-else
-{
-print" {$rs['gangNAME']} ";
+$qs = $db->query("SELECT * FROM gangs WHERE gangID={$ir['gang']}");
+$rs = $db->fetch_row($qs);
+if (!$db->num_rows($qs)) {
+    print "No Gang";
+} else {
+    print" {$rs['gangNAME']} ";
 }
 print "
 </td>
@@ -112,21 +108,21 @@ print "
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br><br>
 <br><table width=75% border=2 class=table style= text-align:center; >";
-$ts=$ir['strength']+$ir['agility']+$ir['guard']+$ir['labour']+$ir['robskill']+$ir['IQ'];
-$ir['strank']=get_rank($ir['strength'],'strength');
-$ir['agirank']=get_rank($ir['agility'],'agility');
-$ir['guarank']=get_rank($ir['guard'],'guard');
-$ir['labrank']=get_rank($ir['labour'],'labour');
-$ir['robrank']=get_rank($ir['robskill'],'robskill');
-$ir['IQrank']=get_rank($ir['IQ'],'IQ');
-$tsrank=get_rank($ts,'strength+agility+guard+labour+IQ');
-$ir['strength']=number_format($ir['strength']);
-$ir['agility']=number_format($ir['agility']);
-$ir['guard']=number_format($ir['guard']);
-$ir['labour']=number_format($ir['labour']);
-$ir['robskill']=number_format($ir['robskill']); 
-$ir['IQ']=number_format($ir['IQ']);
-$ts=number_format($ts);
+$ts = $ir['strength'] + $ir['agility'] + $ir['guard'] + $ir['labour'] + $ir['robskill'] + $ir['IQ'];
+$ir['strank'] = get_rank($ir['strength'], 'strength');
+$ir['agirank'] = get_rank($ir['agility'], 'agility');
+$ir['guarank'] = get_rank($ir['guard'], 'guard');
+$ir['labrank'] = get_rank($ir['labour'], 'labour');
+$ir['robrank'] = get_rank($ir['robskill'], 'robskill');
+$ir['IQrank'] = get_rank($ir['IQ'], 'IQ');
+$tsrank = get_rank($ts, 'strength+agility+guard+labour+IQ');
+$ir['strength'] = number_format($ir['strength']);
+$ir['agility'] = number_format($ir['agility']);
+$ir['guard'] = number_format($ir['guard']);
+$ir['labour'] = number_format($ir['labour']);
+$ir['robskill'] = number_format($ir['robskill']);
+$ir['IQ'] = number_format($ir['IQ']);
+$ts = number_format($ts);
 
 print "<tr><th width='33%'>Stat</th><th width='33%'>Amount</th><th width='34%'>Rank</th></tr>
 <tr><td>Strength</td> <td>{$ir['strength']}</td> <td>Rank: {$ir['strank']}</td></tr>
@@ -140,26 +136,19 @@ print "<tr><th width='33%'>Stat</th><th width='33%'>Amount</th><th width='34%'>R
 </table> </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 
 
-
 $attacks_won = $db->query(sprintf('SELECT COUNT(`log_id`) AS attacking_won FROM `attacklogs` WHERE `attacker` = %u AND `result` = "%s"', $userid, 'won'));
 $attacks_wonc = $db->fetch_row($attacks_won);
 $attacks_lost = $db->query(sprintf('SELECT COUNT(`log_id`) AS attacking_lost FROM `attacklogs` WHERE `attacker` = %u AND `result` = "%s"', $userid, 'lost'));
 $attacks_lostc = $db->fetch_row($attacks_lost);
-if ($attacks_lostc['attacking_lost'])
-{
-$attacking_perl = $attacks_lostc['attacking_lost'] / ($attacks_wonc['attacking_won'] + $attacks_lostc['attacking_lost']) * 100;
+if ($attacks_lostc['attacking_lost']) {
+    $attacking_perl = $attacks_lostc['attacking_lost'] / ($attacks_wonc['attacking_won'] + $attacks_lostc['attacking_lost']) * 100;
+} elseif (!$attacks_lostc['attacking_lost']) {
+    $attacking_perl = 0;
 }
-elseif (!$attacks_lostc['attacking_lost'])
-{
-$attacking_perl = 0;
-}
-if ($attacks_wonc['attacking_won'])
-{
-$attacking_perw = $attacks_wonc['attacking_won'] / ($attacks_wonc['attacking_won'] + $attacks_lostc['attacking_lost']) * 100;
-}
-elseif (!$attacks_wonc['attacking_won'])
-{
-$attacking_perw = 0;
+if ($attacks_wonc['attacking_won']) {
+    $attacking_perw = $attacks_wonc['attacking_won'] / ($attacks_wonc['attacking_won'] + $attacks_lostc['attacking_lost']) * 100;
+} elseif (!$attacks_wonc['attacking_won']) {
+    $attacking_perw = 0;
 }
 
 
@@ -167,50 +156,29 @@ $attacksd_won = $db->query(sprintf('SELECT COUNT(`log_id`) AS defending_won FROM
 $attacksd_wonc = $db->fetch_row($attacksd_won);
 $attacksd_lost = $db->query(sprintf('SELECT COUNT(`log_id`) AS defending_lost FROM `attacklogs` WHERE `attacked` = %u AND `result` = "%s"', $userid, 'won'));
 $attacksd_lostc = $db->fetch_row($attacksd_lost);
-if ($attacksd_lostc['defending_lost'])
-{
-$defending_perl = $attacksd_lostc['defending_lost'] / ($attacksd_wonc['defending_won'] + $attacksd_lostc['defending_lost']) * 100;
+if ($attacksd_lostc['defending_lost']) {
+    $defending_perl = $attacksd_lostc['defending_lost'] / ($attacksd_wonc['defending_won'] + $attacksd_lostc['defending_lost']) * 100;
+} elseif (!$attacksd_lostc['defending_lost']) {
+    $defending_perl = 0;
 }
-elseif (!$attacksd_lostc['defending_lost'])
-{
-$defending_perl = 0;
-}
-if ($attacksd_wonc['defending_won'])
-{
-$defending_perw = $attacksd_wonc['defending_won'] / ($attacksd_wonc['defending_won'] + $attacksd_lostc['defending_lost']) * 100;
-}
-elseif (!$attacksd_wonc['defending_won'])
-{
-$defending_perw = 0;
+if ($attacksd_wonc['defending_won']) {
+    $defending_perw = $attacksd_wonc['defending_won'] / ($attacksd_wonc['defending_won'] + $attacksd_lostc['defending_lost']) * 100;
+} elseif (!$attacksd_wonc['defending_won']) {
+    $defending_perw = 0;
 }
 
 $T_won = $attacks_wonc['attacking_won'] + $attacksd_wonc['defending_won'];
 $T_lost = $attacks_lostc['attacking_lost'] + $attacksd_lostc['defending_lost'];
-if ($T_won)
-{
-$T_won_per = $T_won / ($T_won + $T_lost) * 100;
+if ($T_won) {
+    $T_won_per = $T_won / ($T_won + $T_lost) * 100;
+} elseif (!$T_won) {
+    $T_won_per = 0;
 }
-elseif (!$T_won)
-{
-$T_won_per = 0;
+if ($T_lost) {
+    $T_lost_per = $T_lost / ($T_won + $T_lost) * 100;
+} elseif (!$T_lost) {
+    $T_lost_per = 0;
 }
-if ($T_lost)
-{
-$T_lost_per = $T_lost / ($T_won + $T_lost) * 100;
-}
-elseif (!$T_lost)
-{
-$T_lost_per = 0;
-}
-
-
-
-
-
-
-
-
-
 
 
 echo "
@@ -296,28 +264,25 @@ echo sprintf('
 
 </table>  </div><div><img src="images/generalinfo_btm.jpg" /></div></div></div></div></div></div>
 ',
-$attacks_wonc['attacking_won'], 
-$attacking_perw, 
-$attacks_lostc['attacking_lost'], 
-$attacking_perl, 
-$attacksd_wonc['defending_won'], 
-$defending_perw, 
-$attacksd_lostc['defending_lost'], 
-$defending_perl, 
-$T_won, 
-$T_won_per, 
-$T_lost, 
-$T_lost_per
+    $attacks_wonc['attacking_won'],
+    $attacking_perw,
+    $attacks_lostc['attacking_lost'],
+    $attacking_perl,
+    $attacksd_wonc['defending_won'],
+    $defending_perw,
+    $attacksd_lostc['defending_lost'],
+    $defending_perl,
+    $T_won,
+    $T_won_per,
+    $T_lost,
+    $T_lost_per
 );
 
 
-
-if(isset($_POST['pn_update']))
-
-{
-$db->query("UPDATE users SET user_notepad='{$_POST['pn_update']}' WHERE userid=$userid");
-$ir['user_notepad']=stripslashes($_POST['pn_update']);
-print "<br><br><b>Personal Notepad Updated!</b>";
+if (isset($_POST['pn_update'])) {
+    $db->query("UPDATE users SET user_notepad='{$_POST['pn_update']}' WHERE userid=$userid");
+    $ir['user_notepad'] = stripslashes($_POST['pn_update']);
+    print "<br><br><b>Personal Notepad Updated!</b>";
 }
 
 
@@ -335,7 +300,7 @@ print "
 <div class='personal_md'>
 
 <form action='index.php' method='post'>
-<div class='update_con'><textarea rows='0' cols='0' name='pn_update'> ".htmlspecialchars($ir['user_notepad'])."  </textarea></div>
+<div class='update_con'><textarea rows='0' cols='0' name='pn_update'> " . htmlspecialchars($ir['user_notepad']) . "  </textarea></div>
 <div class='update_btn'><span><input type='image' src='images/update_txt.gif' id='myNotesButton' title='Update Notes' alt='Update Notes' /></span></div>        
 
 

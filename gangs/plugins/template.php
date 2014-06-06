@@ -2,7 +2,7 @@
 
 
 if (!defined('GANG_MODULE')) {
-	return; 
+    return;
 }
 
 ################################

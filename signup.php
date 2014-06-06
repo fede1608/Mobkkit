@@ -1,48 +1,50 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
-require "core.php"; 
-function valid_email($email) {
-  // First, we check that there's one @ symbol, and that the lengths are right
-  if (!ereg("^[^@]{1,64}@[^@]{1,255}$", $email)) {
-    // Email invalid because wrong number of characters in one section, or wrong number of @ symbols.
-    return false;
-  }
-  // Split it into sections to make life easier
-  $email_array = explode("@", $email);
-  $local_array = explode(".", $email_array[0]);
-  for ($i = 0; $i < sizeof($local_array); $i++) {
-     if (!ereg("^(([A-Za-z0-9!#$%&#038;'*+/=?^_`{|}~-][A-Za-z0-9!#$%&#038;'*+/=?^_`{|}~\.-]{0,63})|(\"[^(\\|\")]{0,62}\"))$", $local_array[$i])) {
-      return false;
-    }
-  }  
-  if (!ereg("^\[?[0-9\.]+\]?$", $email_array[1])) { // Check if domain is IP. If not, it should be valid domain name
-    $domain_array = explode(".", $email_array[1]);
-    if (sizeof($domain_array) < 2) {
-        return false; // Not enough parts to domain
-    }
-    for ($i = 0; $i < sizeof($domain_array); $i++) {
-      if (!ereg("^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9]+))$", $domain_array[$i])) {
+require "core.php";
+function valid_email($email)
+{
+    // First, we check that there's one @ symbol, and that the lengths are right
+    if (!ereg("^[^@]{1,64}@[^@]{1,255}$", $email)) {
+        // Email invalid because wrong number of characters in one section, or wrong number of @ symbols.
         return false;
-      }
     }
-  }
-  return true;
+    // Split it into sections to make life easier
+    $email_array = explode("@", $email);
+    $local_array = explode(".", $email_array[0]);
+    for ($i = 0; $i < sizeof($local_array); $i++) {
+        if (!ereg("^(([A-Za-z0-9!#$%&#038;'*+/=?^_`{|}~-][A-Za-z0-9!#$%&#038;'*+/=?^_`{|}~\.-]{0,63})|(\"[^(\\|\")]{0,62}\"))$", $local_array[$i])) {
+            return false;
+        }
+    }
+    if (!ereg("^\[?[0-9\.]+\]?$", $email_array[1])) { // Check if domain is IP. If not, it should be valid domain name
+        $domain_array = explode(".", $email_array[1]);
+        if (sizeof($domain_array) < 2) {
+            return false; // Not enough parts to domain
+        }
+        for ($i = 0; $i < sizeof($domain_array); $i++) {
+            if (!ereg("^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9]+))$", $domain_array[$i])) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
+
 print <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -289,142 +291,123 @@ document.getElementById('cpasswordresult').innerHTML="<font color='red'>$rrerr6<
                                                         
 EOF;
 $IP = $_SERVER['REMOTE_ADDR'];
-$IP=addslashes($IP);
-$IP=mysql_real_escape_string($IP);
-$IP=strip_tags($IP);
-if(file_exists('ipbans/'.$IP))
-{
-die("<b><font color=red size=+1>$ipban</font></b></body></html>");
+$IP = addslashes($IP);
+$IP = mysql_real_escape_string($IP);
+$IP = strip_tags($IP);
+if (file_exists('ipbans/' . $IP)) {
+    die("<b><font color=red size=+1>$ipban</font></b></body></html>");
 }
-if($_POST['username'])
-{
-if($set['regcap_on'])
-{
-  if(!$_SESSION['captcha'] or $_SESSION['captcha'] != $_POST['captcha'])
-  {
-    unset($_SESSION['captcha']);
-    print " 
+if ($_POST['username']) {
+    if ($set['regcap_on']) {
+        if (!$_SESSION['captcha'] or $_SESSION['captcha'] != $_POST['captcha']) {
+            unset($_SESSION['captcha']);
+            print "
     <p> $rrerr0 </p> 
     
 
     ";
-      exit;
-  }
-  unset($_SESSION['captcha']);
-}
-if(!valid_email($_POST['email']))
-{
-    
-print " 
+            exit;
+        }
+        unset($_SESSION['captcha']);
+    }
+    if (!valid_email($_POST['email'])) {
+
+        print "
 <P ALIGN='CENTER'> $rrerr1 
 <br><br><b><a href=signup.php>$rrerr2</a>  </p>
 ";
-exit;
+        exit;
 
-    
-}
-if(strlen($_POST['username']) < 4)
-{
-    
-    
-print "
+
+    }
+    if (strlen($_POST['username']) < 4) {
+
+
+        print "
 <P ALIGN='CENTER'> $rrerr3b 
 <br><br><b><a href=signup.php>$rrerr2</a>  </p> 
 
 ";
-      exit;
+        exit;
 
-    
-}
-$sm=100;
-if($_POST['promo'] == "Your Promo Code Here")
-{
-$sm+=100;
-}
-$username=$_POST['username'];
-$username=str_replace(array("<", ">"), array("&lt;", "&gt;"), $username);
-$q=$db->query("SELECT * FROM users WHERE username='{$username}' OR login_name='{$username}'");
-$q2=$db->query("SELECT * FROM users WHERE email='{$_POST['email']}'");
-if($db->num_rows($q))
-{
-print " 
+
+    }
+    $sm = 100;
+    if ($_POST['promo'] == "Your Promo Code Here") {
+        $sm += 100;
+    }
+    $username = $_POST['username'];
+    $username = str_replace(array("<", ">"), array("&lt;", "&gt;"), $username);
+    $q = $db->query("SELECT * FROM users WHERE username='{$username}' OR login_name='{$username}'");
+    $q2 = $db->query("SELECT * FROM users WHERE email='{$_POST['email']}'");
+    if ($db->num_rows($q)) {
+        print "
 <P ALIGN='CENTER'> $rrerr3 
 <br><br><b><a href=signup.php>$rrerr2</a>  </p> 
 
 
 ";
-      exit;
-}
-else if($db->num_rows($q2))
-{
-print "
+        exit;
+    } else if ($db->num_rows($q2)) {
+        print "
 <P ALIGN='CENTER'>   $rrerr3a 
 <br><br><b><a href=signup.php>$rrerr2</a>  <br><br><b><a href=signup.php>$rrerr2</a>  </p>
 
 
 ";
-      exit;
-}
-else if($_POST['password'] != $_POST['cpassword'])
-{
-print " 
+        exit;
+    } else if ($_POST['password'] != $_POST['cpassword']) {
+        print "
 
 <P ALIGN='CENTER'> $rrerr4 <br><br><b><a href=signup.php>$rrerr2</a>  </p>
 
 ";
-      exit;
-}
-else
-{
-$_POST['ref'] = abs((int) $_POST['ref']);
-$IP = $_SERVER['REMOTE_ADDR'];
-$IP=addslashes($IP);
-$IP=mysql_real_escape_string($IP);
-$IP=strip_tags($IP);
-$q=$db->query("SELECT * FROM users WHERE lastip='$IP' AND userid={$_POST['ref']}");
-if($db->num_rows($q))
-{
-print " 
+        exit;
+    } else {
+        $_POST['ref'] = abs((int)$_POST['ref']);
+        $IP = $_SERVER['REMOTE_ADDR'];
+        $IP = addslashes($IP);
+        $IP = mysql_real_escape_string($IP);
+        $IP = strip_tags($IP);
+        $q = $db->query("SELECT * FROM users WHERE lastip='$IP' AND userid={$_POST['ref']}");
+        if ($db->num_rows($q)) {
+            print "
 
-<P ALIGN='CENTER'> $nomulti <br><br><b><a href=signup.php>$rrerr2</a>  </p>";                                                                 
-exit;
-}
+<P ALIGN='CENTER'> $nomulti <br><br><b><a href=signup.php>$rrerr2</a>  </p>";
+            exit;
+        }
 
 
+        if ($_POST['ref']) {
+            $q = $db->query("SELECT * FROM users WHERE userid={$_POST['ref']}");
+            $r = $db->fetch_row($q);
+        }
+        $db->query("INSERT INTO users (username, display_pic, login_name, userpass, level, money, crystals, donatordays, user_level, energy, maxenergy, will, maxwill, brave, maxbrave, hp, maxhp, location, gender, signedup, email, bankmoney, lastip, lastip_signup) VALUES( '{$username}', 'http://{$_SERVER['HTTP_HOST']}/images/avatar.gif', '{$username}', md5('{$_POST['password']}'), 1, $sm, 0, 0, 1, 12, 12, 100, 100, 5, 5, 100, 100, 1, '{$_POST['gender']}', unix_timestamp(), '{$_POST['email']}', -1, '$IP', '$IP')");
+        $i = $db->insert_id();
+        $db->query("INSERT INTO userstats VALUES($i, 10, 10, 10, 10, 10, 5)");
 
-if($_POST['ref']) {
-$q=$db->query("SELECT * FROM users WHERE userid={$_POST['ref']}");
-$r=$db->fetch_row($q);
-}
-$db->query("INSERT INTO users (username, display_pic, login_name, userpass, level, money, crystals, donatordays, user_level, energy, maxenergy, will, maxwill, brave, maxbrave, hp, maxhp, location, gender, signedup, email, bankmoney, lastip, lastip_signup) VALUES( '{$username}', 'http://{$_SERVER['HTTP_HOST']}/images/avatar.gif', '{$username}', md5('{$_POST['password']}'), 1, $sm, 0, 0, 1, 12, 12, 100, 100, 5, 5, 100, 100, 1, '{$_POST['gender']}', unix_timestamp(), '{$_POST['email']}', -1, '$IP', '$IP')");   
-$i=$db->insert_id();
-$db->query("INSERT INTO userstats VALUES($i, 10, 10, 10, 10, 10, 5)");
-
-if($_POST['ref']) {
-require "global_func.php";
-$db->query("UPDATE users SET crystals=crystals+2 WHERE userid={$_POST['ref']}");
-event_add($_POST['ref'],"For refering $username to the game, you have earnt 2 valuable crystals!",$c);
-$db->query("INSERT INTO referals VALUES('', {$_POST['ref']}, $i, unix_timestamp(),'{$r['lastip']}','$IP')");
-}
-print "
+        if ($_POST['ref']) {
+            require "global_func.php";
+            $db->query("UPDATE users SET crystals=crystals+2 WHERE userid={$_POST['ref']}");
+            event_add($_POST['ref'], "For refering $username to the game, you have earnt 2 valuable crystals!", $c);
+            $db->query("INSERT INTO referals VALUES('', {$_POST['ref']}, $i, unix_timestamp(),'{$r['lastip']}','$IP')");
+        }
+        print "
 
 <P ALIGN='CENTER'>$regsucess <br><br><b><a href=login.php>$reglogin</a>  </p> 
 ";
-}
-}
-else
-{
-if($set['regcap_on'])
-{  $chars="123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!?\\/%^";
-  $len=strlen($chars);
-  $_SESSION['captcha']="";
-  for($i=0;$i<6;$i++)
-  $_SESSION['captcha'].=$chars[rand(0, $len - 1)];
-}
+    }
+} else {
+    if ($set['regcap_on']) {
+        $chars = "123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!?\\/%^";
+        $len = strlen($chars);
+        $_SESSION['captcha'] = "";
+        for ($i = 0; $i < 6; $i++)
+            $_SESSION['captcha'] .= $chars[rand(0, $len - 1)];
+    }
 
 
-
-print "
+    print "
 
 <table width='100%' class='table' cellspacing='1'>
 <tr>
@@ -457,24 +440,25 @@ print "
 
 <input type=hidden name=ref value='";
 
-if($_GET['REF']) { print $_GET['REF']; }
-print "' />";
-if($set['regcap_on'])
-{
-print " <tr>
+    if ($_GET['REF']) {
+        print $_GET['REF'];
+    }
+    print "' />";
+    if ($set['regcap_on']) {
+        print " <tr>
 <td colspan=2><img src='captcha_verify.php?bgcolor=C3C3C3' width='170' height='88'/><br /></td>
 <td><b>Enter Captcha Code</b></td><td colspan=2><div class='reg_namebox'><input type='text'  name='captcha' /></td>
 </tr> ";
-}
-print "
+    }
+    print "
 <tr>
 <td colspan=3 align=center><div class='reg_nametxt'><input type=submit value=$rreg id='reg_btn' style='color:#000;></td>
 </tr>
 </table><div class='regtop'> </div>    
 </form><br />";
 
-} 
- 
+}
+
 print <<<OUT
 
  <!--  Do Not Remove Powered By Ravan Scripts without permission .
@@ -485,7 +469,7 @@ However, if you would like to use the script without the powered by links you ma
 
 OUT;
 
-include "lfooter.php";  
+include "lfooter.php";
 
 
 ?>

@@ -1,23 +1,25 @@
 <?php
-include "globals.php"; 
+include "globals.php";
 if (!function_exists('array_diff_key')) {
-	function array_diff_key() {
-		$arrs = func_get_args();
-		$result = array_shift($arrs);
-		foreach ($arrs as $array) {
-			foreach ($result as $key => $v) {
-				if (array_key_exists($key, $array)) {
-					unset($result[$key]);
-				}
-			}
-		}
-		return $result;
-	}
+    function array_diff_key()
+    {
+        $arrs = func_get_args();
+        $result = array_shift($arrs);
+        foreach ($arrs as $array) {
+            foreach ($result as $key => $v) {
+                if (array_key_exists($key, $array)) {
+                    unset($result[$key]);
+                }
+            }
+        }
+        return $result;
+    }
 }
 if (!function_exists(array_fill_keys)) {
-	function array_fill_keys($keys, $value) {
-		return array_combine($keys,array_fill(0,count($keys),$value));
-	}
+    function array_fill_keys($keys, $value)
+    {
+        return array_combine($keys, array_fill(0, count($keys), $value));
+    }
 }
 
 
@@ -27,8 +29,8 @@ if (!function_exists(array_fill_keys)) {
 
 /* --------------------------------------\
 	Make sure to retain this query:     */
-$gq=mysql_query("SELECT g.* FROM gangs g WHERE g.gangID={$ir['gang']}");
-$gangdata=mysql_fetch_array($gq);
+$gq = mysql_query("SELECT g.* FROM gangs g WHERE g.gangID={$ir['gang']}");
+$gangdata = mysql_fetch_array($gq);
 /*	Make sure to retain the above query  \
 ----------------------------------------*/
 

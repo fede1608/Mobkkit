@@ -1,21 +1,21 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Mafia Game Scripts Online Mafia Game
-| Software Author      : Mafia Game Scripts
-| Software Version     : Version 2.3.1 Build 2301
-| Website              : http://www.mafiagamescript.net/
-| E-mail               : support@mafiagamescript.net
-|**************************************************************************************************
-| The source files are subject to the Mafia Game Script End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Mafia Game Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Mafia Game Script . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Mafia Game Scripts Online Mafia Game
+ * | Software Author      : Mafia Game Scripts
+ * | Software Version     : Version 2.3.1 Build 2301
+ * | Website              : http://www.mafiagamescript.net/
+ * | E-mail               : support@mafiagamescript.net
+ * |**************************************************************************************************
+ * | The source files are subject to the Mafia Game Script End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Mafia Game Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Mafia Game Script . All rights reserved.
+ * |**************************************************************************************************/
 
-require "core.php"; 
+require "core.php";
 print <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -168,17 +168,14 @@ nbArr[nbArr.length] = img;
 EOF;
 
 
-if($_POST['email'])
-{
-$_POST['email'] = htmlentities($_POST['email']);
-$_POST['username'] = htmlentities($_POST['username']);
-if($_GET['username'])
-{
-$search_users = mysql_query("SELECT * FROM users WHERE login_name='".$_POST['username']."'") or die(mysql_error());
-if(mysql_num_rows($search_users) == 0)
-{
-{
-print "
+if ($_POST['email']) {
+    $_POST['email'] = htmlentities($_POST['email']);
+    $_POST['username'] = htmlentities($_POST['username']);
+    if ($_GET['username']) {
+        $search_users = mysql_query("SELECT * FROM users WHERE login_name='" . $_POST['username'] . "'") or die(mysql_error());
+        if (mysql_num_rows($search_users) == 0) {
+            {
+                print "
 
 <p> $rerr1 </p>
 
@@ -256,20 +253,19 @@ $fems $fem</div> <br /></td></tr>
 
 ";
 
-exit;
+                exit;
 
 
-}
+            }
 
 
-}
-}
-$search_email = mysql_query("SELECT * FROM users WHERE email='".$_POST['email']."'") or die(mysql_error());
-if(mysql_num_rows($search_email) == 0)
-{
+        }
+    }
+    $search_email = mysql_query("SELECT * FROM users WHERE email='" . $_POST['email'] . "'") or die(mysql_error());
+    if (mysql_num_rows($search_email) == 0) {
 
 
-print "
+        print "
 
 
 <p> $rerr1  </p>
@@ -351,42 +347,30 @@ $fems $fem</div> <br /></td></tr>
 
 ";
 
-exit;
+        exit;
 
 
-}
+    }
 
 
-$password = rand(10000,20000);
-$passnew = md5($password);
-$emails = $_POST['email'];
-$db->query("UPDATE users SET userpass='$passnew' WHERE email='$emails'") or die(mysql_error());
-$fetch_data = mysql_fetch_assoc($search_email);
-$username = $fetch_data['username'];
-$body = "$rem1 {$set['game_name']} $rem2\n\n $rem3 ".$password."\n $rem4 ".$fetch_data['login_name']."\n\n $rem5 {$_SERVER['HTTP_HOST']}. Enjoy\n\n $rem6  {$set['game_name']} $rem7";
-$subject = "$rem0a";
-$email = $fetch_data['email'];
-$from = "From: {$set['game_name']} $rem0{$_SERVER['HTTP_HOST']}";
-mail($email, $subject, $body, $from);
+    $password = rand(10000, 20000);
+    $passnew = md5($password);
+    $emails = $_POST['email'];
+    $db->query("UPDATE users SET userpass='$passnew' WHERE email='$emails'") or die(mysql_error());
+    $fetch_data = mysql_fetch_assoc($search_email);
+    $username = $fetch_data['username'];
+    $body = "$rem1 {$set['game_name']} $rem2\n\n $rem3 " . $password . "\n $rem4 " . $fetch_data['login_name'] . "\n\n $rem5 {$_SERVER['HTTP_HOST']}. Enjoy\n\n $rem6  {$set['game_name']} $rem7";
+    $subject = "$rem0a";
+    $email = $fetch_data['email'];
+    $from = "From: {$set['game_name']} $rem0{$_SERVER['HTTP_HOST']}";
+    mail($email, $subject, $body, $from);
 
 
-
-
-
-
-
-
-
-
-
-
-print "
+    print "
 
 
 <p> $rem8 <br><br> $rem9 </p>
 ";
-
-
 
 
 }
@@ -426,8 +410,6 @@ Email Address: <input type='text' name='email' /><br></div>
 
 
 ";
-
-
 
 
 print <<<OUT
@@ -474,7 +456,7 @@ However, if you would like to use the script without the powered by links you ma
 
 OUT;
 
-include "lfooter.php"; 
+include "lfooter.php";
 
 
 ?>

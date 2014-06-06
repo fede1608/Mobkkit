@@ -1,52 +1,45 @@
 <?php
 
-include"globals.php";
-if($ir[hospital]>0)
-{
-die("You are in the hospital for {$ir[hospital]} minutes.");
+include "globals.php";
+if ($ir[hospital] > 0) {
+    die("You are in the hospital for {$ir[hospital]} minutes.");
 }
-if($ir[jail]>0)
-{
-die("You are in jail for {$ir[jail]} minutes.");
+if ($ir[jail] > 0) {
+    die("You are in jail for {$ir[jail]} minutes.");
 }
-$getshops=$db->query("select * from usershops where userid=$userid");
-if(mysql_num_rows($getshops)!=0)
-{
-echo ("Sorry, but you already own a shop!");
-exit($h->endpage());
+$getshops = $db->query("select * from usershops where userid=$userid");
+if (mysql_num_rows($getshops) != 0) {
+    echo("Sorry, but you already own a shop!");
+    exit($h->endpage());
 }
 
 
-if($_POST['submit'])
-{
+if ($_POST['submit']) {
 
 //shop cost based on how many shops are already made (default)
-$f=$db->query("SELECT id FROM usershops");
-$shops=mysql_num_rows($f);
-$shopcost=(($shops*1000)+1000);
+    $f = $db->query("SELECT id FROM usershops");
+    $shops = mysql_num_rows($f);
+    $shopcost = (($shops * 1000) + 1000);
 
 //fixed shop cost (not default - uncomment the line below, and delete/comment the 3 lines above to use fixed)
 //$shopcost=10000;
 
 
-if($ir['money'] < $shopcost)
-{
-echo("<center>You don't have enough money to open a shop!
+    if ($ir['money'] < $shopcost) {
+        echo("<center>You don't have enough money to open a shop!
 You need at least $$shopcost.</center>");
-exit($h->endpage());
-}
-$name=mysql_real_escape_string($_POST['name']);
-$description=mysql_real_escape_string($_POST['description']);
-$image=mysql_real_escape_string($_POST['image']);
+        exit($h->endpage());
+    }
+    $name = mysql_real_escape_string($_POST['name']);
+    $description = mysql_real_escape_string($_POST['description']);
+    $image = mysql_real_escape_string($_POST['image']);
 
-$db->query("INSERT INTO usershops VALUES('','$userid','$name','$description','$image','5','0','0')") or die(mysql_error());
-$i=mysql_insert_id($c);
-$db->query("update users set money=money-$shopcost where userid=$userid");
-print "You have successfully created your own shop!<br><a href='myshop.php'>Click here to manage your shop</a>";
-}
-else
-{
-print "
+    $db->query("INSERT INTO usershops VALUES('','$userid','$name','$description','$image','5','0','0')") or die(mysql_error());
+    $i = mysql_insert_id($c);
+    $db->query("update users set money=money-$shopcost where userid=$userid");
+    print "You have successfully created your own shop!<br><a href='myshop.php'>Click here to manage your shop</a>";
+} else {
+    print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>

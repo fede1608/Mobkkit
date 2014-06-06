@@ -1,49 +1,51 @@
-<?php       
+<?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 include "sglobals.php";
 //This contains general thingies
-switch($_GET['action'])
-{
-case 'basicset': basicsettings(); break;
-case 'announce': announcements(); break;
-case 'cmanual': cronmanual(); break; 
-default: index(); break;
+switch ($_GET['action']) {
+    case 'basicset':
+        basicsettings();
+        break;
+    case 'announce':
+        announcements();
+        break;
+    case 'cmanual':
+        cronmanual();
+        break;
+    default:
+        index();
+        break;
 }
 function basicsettings()
 {
-global $db,$ir,$c,$h,$userid,$set;
-if($ir['user_level'] != 2)
-{
-die("403");
-}
-if($_POST['submit'])
-{
-unset($_POST['submit']);
-foreach($_POST as $k => $v)
-{
-$db->query("UPDATE `settings` SET conf_value='$v' WHERE conf_name='$k'");
-}
-print "Settings updated!<br />
+    global $db, $ir, $c, $h, $userid, $set;
+    if ($ir['user_level'] != 2) {
+        die("403");
+    }
+    if ($_POST['submit']) {
+        unset($_POST['submit']);
+        foreach ($_POST as $k => $v) {
+            $db->query("UPDATE `settings` SET conf_value='$v' WHERE conf_name='$k'");
+        }
+        print "Settings updated!<br />
 <a href='staff.php?action=basicset'>Back</a>";
-stafflog_add("Updated the basic game settings");
-}
-else
-{
-print "
+        stafflog_add("Updated the basic game settings");
+    } else {
+        print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -62,117 +64,94 @@ Game Description:<br />
 <textarea rows='15' cols='55' name='game_description'>{$set['game_description']}</textarea><br />
 Paypal Address: <input type='text' STYLE='color: black;  background-color: white;' name='paypal' value='{$set['paypal']}' /><br />
 Gym/Crimes Validation: <select name='validate_on' type='dropdown'>";
-$opt=array(
-"1" => "On",
-"0" => "Off"
-);
-foreach($opt as $k => $v)
-{
-if($k == $set['validate_on'])
-{
-print "<option value='{$k}' selected='selected'>{$v}</option>";
-}
-else
-{
-print "<option value='{$k}'>{$v}</option>";
-}
-}
-print "</select><br />
+        $opt = array(
+            "1" => "On",
+            "0" => "Off"
+        );
+        foreach ($opt as $k => $v) {
+            if ($k == $set['validate_on']) {
+                print "<option value='{$k}' selected='selected'>{$v}</option>";
+            } else {
+                print "<option value='{$k}'>{$v}</option>";
+            }
+        }
+        print "</select><br />
 Validation Period: <select name='validate_period' type='dropdown'>";
-$opt=array(
-"5" => "Every 5 Minutes",
-"15" => "Every 15 Minutes",
-"60" => "Every Hour",
-"login" => "Every Login"
-);
-foreach($opt as $k => $v)
-{
-if($k == $set['validate_period'])
-{
-print "<option value='{$k}' selected='selected'>{$v}</option>";
-}
-else
-{
-print "<option value='{$k}'>{$v}</option>";
-}
-}
-print "</select><br />
+        $opt = array(
+            "5" => "Every 5 Minutes",
+            "15" => "Every 15 Minutes",
+            "60" => "Every Hour",
+            "login" => "Every Login"
+        );
+        foreach ($opt as $k => $v) {
+            if ($k == $set['validate_period']) {
+                print "<option value='{$k}' selected='selected'>{$v}</option>";
+            } else {
+                print "<option value='{$k}'>{$v}</option>";
+            }
+        }
+        print "</select><br />
 Registration CAPTCHA: <select name='regcap_on' type='dropdown'>";
-$opt=array(
-"1" => "On",
-"0" => "Off"
-);
-foreach($opt as $k => $v)
-{
-if($k == $set['regcap_on'])
-{
-print "<option value='{$k}' selected='selected'>{$v}</option>";
-}
-else
-{
-print "<option value='{$k}'>{$v}</option>";
-}
-}
-print "</select><br />
+        $opt = array(
+            "1" => "On",
+            "0" => "Off"
+        );
+        foreach ($opt as $k => $v) {
+            if ($k == $set['regcap_on']) {
+                print "<option value='{$k}' selected='selected'>{$v}</option>";
+            } else {
+                print "<option value='{$k}'>{$v}</option>";
+            }
+        }
+        print "</select><br />
 Send Crystals: <select name='sendcrys_on' type='dropdown'>";
-$opt=array(
-"1" => "On",
-"0" => "Off"
-);
-foreach($opt as $k => $v)
-{
-if($k == $set['sendcrys_on'])
-{
-print "<option value='{$k}' selected='selected'>{$v}</option>";
-}
-else
-{
-print "<option value='{$k}'>{$v}</option>";
-}
-}
-print "</select><br />
+        $opt = array(
+            "1" => "On",
+            "0" => "Off"
+        );
+        foreach ($opt as $k => $v) {
+            if ($k == $set['sendcrys_on']) {
+                print "<option value='{$k}' selected='selected'>{$v}</option>";
+            } else {
+                print "<option value='{$k}'>{$v}</option>";
+            }
+        }
+        print "</select><br />
 Bank Xfers: <select name='sendbank_on' type='dropdown'>";
-$opt=array(
-"1" => "On",
-"0" => "Off"
-);
-foreach($opt as $k => $v)
-{
-if($k == $set['sendbank_on'])
-{
-print "<option value='{$k}' selected='selected'>{$v}</option>";
-}
-else
-{
-print "<option value='{$k}'>{$v}</option>";
-}
-}
-print "</select><br />
+        $opt = array(
+            "1" => "On",
+            "0" => "Off"
+        );
+        foreach ($opt as $k => $v) {
+            if ($k == $set['sendbank_on']) {
+                print "<option value='{$k}' selected='selected'>{$v}</option>";
+            } else {
+                print "<option value='{$k}'>{$v}</option>";
+            }
+        }
+        print "</select><br />
 Energy Refill Price (crystals): <input type='text' STYLE='color: black;  background-color: white;' name='ct_refillprice' value='{$set['ct_refillprice']}' /><br />
 IQ per crystal: <input type='text' STYLE='color: black;  background-color: white;' name='ct_iqpercrys' value='{$set['ct_iqpercrys']}' /><br />
 Money per crystal: <input type='text' STYLE='color: black;  background-color: white;' name='ct_moneypercrys' value='{$set['ct_moneypercrys']}' /><br />
-Will Potion Item: ".item_dropdown($c, "willp_item", $set['willp_item'])."<br />
+Will Potion Item: " . item_dropdown($c, "willp_item", $set['willp_item']) . "<br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Update Settings' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
+    }
 }
-}
+
 function announcements()
 {
-global $db,$ir,$c,$h,$userid,$set;
-if($ir['user_level'] != 2)
-{
-die("403");
-}
-if($_POST['text'])
-{
-$db->query("INSERT INTO announcements VALUES('{$_POST['text']}', unix_timestamp())");
-$db->query("UPDATE users SET new_announcements=new_announcements+1");
-print "Announcement added!<br />
+    global $db, $ir, $c, $h, $userid, $set;
+    if ($ir['user_level'] != 2) {
+        die("403");
+    }
+    if ($_POST['text']) {
+        $db->query("INSERT INTO announcements VALUES('{$_POST['text']}', unix_timestamp())");
+        $db->query("UPDATE users SET new_announcements=new_announcements+1");
+        print "Announcement added!<br />
 &gt; <a href='staff.php'>Back</a>";
-stafflog_add("Added a new announcement");
-}
-else
-{
-print "
+        stafflog_add("Added a new announcement");
+    } else {
+        print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -184,18 +163,17 @@ Please try to make sure the announcement is concise and covers everything you wa
 Announcement text:<br />
 <textarea name='text' rows='10' cols='60'></textarea><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Add Announcement' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
-}
+    }
 }
 
 
 function cronmanual()
 {
-global $db,$ir,$c,$h,$userid,$set;
-if($ir['user_level'] != 2)
-{
-die("403");
-}
-print "
+    global $db, $ir, $c, $h, $userid, $set;
+    if ($ir['user_level'] != 2) {
+        die("403");
+    }
+    print "
 
 
 
@@ -242,18 +220,16 @@ Run Battle Ladder cron , every week , month or so ! <br>Running this job credit 
 }
 
 
-
 function index()
 {
-global $db,$ir,$c,$h,$userid,$set, $_CONFIG;
-$pv=phpversion();
-$mv=$db->fetch_single($db->query("SELECT VERSION()"));
-$dv=$_CONFIG['driver'];
-if($ir['user_level']==2)
-{
-$versionno=2101;
-$version="2.1.01";
-print "
+    global $db, $ir, $c, $h, $userid, $set, $_CONFIG;
+    $pv = phpversion();
+    $mv = $db->fetch_single($db->query("SELECT VERSION()"));
+    $dv = $_CONFIG['driver'];
+    if ($ir['user_level'] == 2) {
+        $versionno = 2101;
+        $version = "2.1.01";
+        print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -298,30 +274,29 @@ print "
 <th>Time</th>
 <th>IP</th>
 </tr>";
-$q=$db->query("SELECT s.*, u.* FROM stafflog AS s LEFT JOIN users AS u ON s.user=u.userid ORDER BY s.time DESC LIMIT 10");
-while($r=$db->fetch_row($q))
-{
-print "<tr><td>{$r['username']} [{$r['user']}]</td> <td>{$r['action']}</td> <td>".date('F j Y g:i:s a', $r['time'])."</td> <td>{$r['ip']}</td></tr>";
-}
-print "</table></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
-}
-print "   
+        $q = $db->query("SELECT s.*, u.* FROM stafflog AS s LEFT JOIN users AS u ON s.user=u.userid ORDER BY s.time DESC LIMIT 10");
+        while ($r = $db->fetch_row($q)) {
+            print "<tr><td>{$r['username']} [{$r['user']}]</td> <td>{$r['action']}</td> <td>" . date('F j Y g:i:s a', $r['time']) . "</td> <td>{$r['ip']}</td></tr>";
+        }
+        print "</table></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
+    }
+    print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
 <div class='info_mid'><h2 style='padding-top:10px;'> Staff Notepad</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>";
-if($_POST['pad'])
-{
-$db->query("UPDATE settings SET conf_value='{$_POST['pad']}' WHERE conf_name='staff_pad'");
-$set['staff_pad']=stripslashes($_POST['pad']);
-print "<b>Staff Notepad Updated!</b><hr />";
-}
-print "<form action='staff.php' method='post'>
-<textarea rows='10' cols='60' name='pad'>".htmlspecialchars($set['staff_pad'])."</textarea><br />
+    if ($_POST['pad']) {
+        $db->query("UPDATE settings SET conf_value='{$_POST['pad']}' WHERE conf_name='staff_pad'");
+        $set['staff_pad'] = stripslashes($_POST['pad']);
+        print "<b>Staff Notepad Updated!</b><hr />";
+    }
+    print "<form action='staff.php' method='post'>
+<textarea rows='10' cols='60' name='pad'>" . htmlspecialchars($set['staff_pad']) . "</textarea><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Update Notepad' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
 }
+
 $h->endpage();
 ?>
 

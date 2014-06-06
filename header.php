@@ -1,72 +1,73 @@
-<?php     
+<?php
 
 error_reporting(0);
 /**************************************************************************************************
-| Software Name        : Mafia Game Scripts Online Mafia Game
-| Software Author      : Mafia Game Scripts
-| Software Version     : Version 2.3.1 Build 2301
-| Website              : http://www.mafiagamescript.net/
-| E-mail               : support@mafiagamescript.net
-|**************************************************************************************************
-| The source files are subject to the Mafia Game Script End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Mafia Game Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Mafia Game Script . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Mafia Game Scripts Online Mafia Game
+ * | Software Author      : Mafia Game Scripts
+ * | Software Version     : Version 2.3.1 Build 2301
+ * | Website              : http://www.mafiagamescript.net/
+ * | E-mail               : support@mafiagamescript.net
+ * |**************************************************************************************************
+ * | The source files are subject to the Mafia Game Script End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Mafia Game Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Mafia Game Script . All rights reserved.
+ * |**************************************************************************************************/
 
-class headers {
-function startheaders() {  
-global $ir, $set;
-global $_CONFIG;
-define("MONO_ON", 1);
-$db=new database;
-$db->configure($_CONFIG['hostname'],
-$_CONFIG['username'],
-$_CONFIG['password'],
-$_CONFIG['database'],
-$_CONFIG['persistent']);
-$db->connect();
-$c=$db->connection_id;
-$set=array();
-$settq=$db->query("SELECT * FROM settings");
-while($r=$db->fetch_row($settq))
+class headers
 {
-$set[$r['conf_name']]=$r['conf_value'];
-}
-$q=$db->query("SELECT userid FROM users");
-$membs=$db->num_rows($q);
-$q=$db->query("SELECT userid FROM users WHERE bankmoney>-1");
-$banks=$db->num_rows($q);
-$q=$db->query("SELECT userid FROM users WHERE gender='Male'");
-$male=$db->num_rows($q);
-$q=$db->query("SELECT userid FROM users WHERE gender='Female'");
-$fem=$db->num_rows($q);
-$money=money_formatter($ir['money']);
-$crystals=money_formatter($ir['crystals'],'');
-$cn=0;
+    function startheaders()
+    {
+        global $ir, $set;
+        global $_CONFIG;
+        define("MONO_ON", 1);
+        $db = new database;
+        $db->configure($_CONFIG['hostname'],
+            $_CONFIG['username'],
+            $_CONFIG['password'],
+            $_CONFIG['database'],
+            $_CONFIG['persistent']);
+        $db->connect();
+        $c = $db->connection_id;
+        $set = array();
+        $settq = $db->query("SELECT * FROM settings");
+        while ($r = $db->fetch_row($settq)) {
+            $set[$r['conf_name']] = $r['conf_value'];
+        }
+        $q = $db->query("SELECT userid FROM users");
+        $membs = $db->num_rows($q);
+        $q = $db->query("SELECT userid FROM users WHERE bankmoney>-1");
+        $banks = $db->num_rows($q);
+        $q = $db->query("SELECT userid FROM users WHERE gender='Male'");
+        $male = $db->num_rows($q);
+        $q = $db->query("SELECT userid FROM users WHERE gender='Female'");
+        $fem = $db->num_rows($q);
+        $money = money_formatter($ir['money']);
+        $crystals = money_formatter($ir['crystals'], '');
+        $cn = 0;
 // Users Online , Counts Users Online In Last 15 minutes                                                                           
-$q=$db->query("SELECT * FROM users WHERE laston>unix_timestamp()-15*60 ORDER BY laston DESC");
-$online=$db->num_rows($q);
-$ec=$ir['new_events'];
-$mc=$ir['new_mail'];
+        $q = $db->query("SELECT * FROM users WHERE laston>unix_timestamp()-15*60 ORDER BY laston DESC");
+        $online = $db->num_rows($q);
+        $ec = $ir['new_events'];
+        $mc = $ir['new_mail'];
 
-$ids_checkpost=urldecode($_SERVER['QUERY_STRING']);
-if(eregi("[\'|'/'\''<'>'*'~'`']",$ids_checkpost) || strstr($ids_checkpost,'union') || strstr($ids_checkpost,'java') || strstr($ids_checkpost,'script') || strstr($ids_checkpost,'substring(') || strstr($ids_checkpost,'ord()')){
+        $ids_checkpost = urldecode($_SERVER['QUERY_STRING']);
+        if (eregi("[\'|'/'\''<'>'*'~'`']", $ids_checkpost) || strstr($ids_checkpost, 'union') || strstr($ids_checkpost, 'java') || strstr($ids_checkpost, 'script') || strstr($ids_checkpost, 'substring(') || strstr($ids_checkpost, 'ord()')) {
 
-$passed=0;
-echo "<center> <font color=red> Hack attempt <br/>!!! WARNING !!! <br/>
+            $passed = 0;
+            echo "<center> <font color=red> Hack attempt <br/>!!! WARNING !!! <br/>
 
-Malicious Code Detected! The staff has been notified.</font></center>"; 
-event_add(1,"  <a href='viewuser.php?u={$ir['userid']}'>  <font color=red> ".$ir['username']."</font> </a>  <b> Tried to use [".$_SERVER['SCRIPT_NAME']."{$ids_checkpost}].. ",$c); 
-$h->endpage();
-exit;
+Malicious Code Detected! The staff has been notified.</font></center>";
+            event_add(1, "  <a href='viewuser.php?u={$ir['userid']}'>  <font color=red> " . $ir['username'] . "</font> </a>  <b> Tried to use [" . $_SERVER['SCRIPT_NAME'] . "{$ids_checkpost}].. ", $c);
+            $h->endpage();
+            exit;
 
-} 
+        }
 
 
-echo <<<EOF
+        echo <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -203,67 +204,66 @@ $('#points_money').html(resarray[1]);
 
 
 EOF;
-}
-function userdata($ir,$lv,$fm,$cm,$dosessh=1)
-{
-global $db,$c,$userid, $set;
-$IP = $_SERVER['REMOTE_ADDR'];
-$IP=addslashes($IP);
-$IP=mysql_real_escape_string($IP);
-$IP=strip_tags($IP);
-$db->query("UPDATE users SET laston=unix_timestamp(),lastip='$IP' WHERE userid=$userid");
-$_GET['ID'] = abs(@intval($_GET['ID']));
-$_GET['reply'] = abs(@intval($_GET['reply']));
+    }
+
+    function userdata($ir, $lv, $fm, $cm, $dosessh = 1)
+    {
+        global $db, $c, $userid, $set;
+        $IP = $_SERVER['REMOTE_ADDR'];
+        $IP = addslashes($IP);
+        $IP = mysql_real_escape_string($IP);
+        $IP = strip_tags($IP);
+        $db->query("UPDATE users SET laston=unix_timestamp(),lastip='$IP' WHERE userid=$userid");
+        $_GET['ID'] = abs(@intval($_GET['ID']));
+        $_GET['reply'] = abs(@intval($_GET['reply']));
 
 
-if(!$ir['email'])
-{
-global $domain;
-die ("<body>Your account may be broken. Please mail help@{$domain} stating your username and player ID.");
-}
-if($dosessh && ($_SESSION['attacking'] || $ir['attacking']))
-{
-print "<CENTER><P><b><font color=red>You lost all your EXP for running from the fight.</font></b></P></CENTER> <br/><br/>";
-$db->query("UPDATE users SET exp=0,attacking=0 WHERE userid=$userid");
-$_SESSION['attacking']=0;
-}
-$enperc=(int) ($ir['energy']/$ir['maxenergy']*100);
-$wiperc=(int) ($ir['will']/$ir['maxwill']*100);
-$experc=(int) ( $ir['exp']/$ir['exp_needed']*100);
-$brperc=(int) ($ir['brave']/$ir['maxbrave']*100);
-$hpperc=(int) ($ir['hp']/$ir['maxhp']*100);
-$enopp=100-$enperc;
-$wiopp=100-$wiperc;
-$exopp=100-$experc;
-$bropp=100-$brperc;
-$hpopp=100-$hpperc;
-$d="";
-$u=$ir['username'];
-if($ir['donatordays']) { $u = "<font color=green>{$ir['username']}</font>";$d="<img src='donator.gif' alt='Donator: {$ir['donatordays']} Days Left' title='Donator: {$ir['donatordays']} Days Left' />"; }
+        if (!$ir['email']) {
+            global $domain;
+            die ("<body>Your account may be broken. Please mail help@{$domain} stating your username and player ID.");
+        }
+        if ($dosessh && ($_SESSION['attacking'] || $ir['attacking'])) {
+            print "<CENTER><P><b><font color=red>You lost all your EXP for running from the fight.</font></b></P></CENTER> <br/><br/>";
+            $db->query("UPDATE users SET exp=0,attacking=0 WHERE userid=$userid");
+            $_SESSION['attacking'] = 0;
+        }
+        $enperc = (int)($ir['energy'] / $ir['maxenergy'] * 100);
+        $wiperc = (int)($ir['will'] / $ir['maxwill'] * 100);
+        $experc = (int)($ir['exp'] / $ir['exp_needed'] * 100);
+        $brperc = (int)($ir['brave'] / $ir['maxbrave'] * 100);
+        $hpperc = (int)($ir['hp'] / $ir['maxhp'] * 100);
+        $enopp = 100 - $enperc;
+        $wiopp = 100 - $wiperc;
+        $exopp = 100 - $experc;
+        $bropp = 100 - $brperc;
+        $hpopp = 100 - $hpperc;
+        $d = "";
+        $u = $ir['username'];
+        if ($ir['donatordays']) {
+            $u = "<font color=green>{$ir['username']}</font>";
+            $d = "<img src='donator.gif' alt='Donator: {$ir['donatordays']} Days Left' title='Donator: {$ir['donatordays']} Days Left' />";
+        }
 
-$gn=""; 
-global $staffpage;
+        $gn = "";
+        global $staffpage;
 
-$bgcolor = 'FFFFFF';     
+        $bgcolor = 'FFFFFF';
 
-include "travellingglobals.php";
+        include "travellingglobals.php";
 
-if($ir['fedjail'])
-{
-$q=$db->query("SELECT * FROM fedjail WHERE fed_userid=$userid");
-$r=$db->fetch_row($q);
-die(" <br /><br /><br /><br /><br /> <CENTER><P> <b><font color=red size=+1>You have been put in the {$set['game_name']} Federal Jail for {$r['fed_days']} day(s).<br /> <br />
-Reason: {$r['fed_reason']}</font></b> </P></CENTER> </body></html>"); 
-}
-
+        if ($ir['fedjail']) {
+            $q = $db->query("SELECT * FROM fedjail WHERE fed_userid=$userid");
+            $r = $db->fetch_row($q);
+            die(" <br /><br /><br /><br /><br /> <CENTER><P> <b><font color=red size=+1>You have been put in the {$set['game_name']} Federal Jail for {$r['fed_days']} day(s).<br /> <br />
+Reason: {$r['fed_reason']}</font></b> </P></CENTER> </body></html>");
+        }
 
 
-if(file_exists('ipbans/'.$IP))
-{
-die("<br /><br /><br /><br /><br /><CENTER><P><b><font color=red size=+1>Your IP has been banned from {$set['game_name']}, there is no way around this.</font></b></P></CENTER></body></html>");
-}
+        if (file_exists('ipbans/' . $IP)) {
+            die("<br /><br /><br /><br /><br /><CENTER><P><b><font color=red size=+1>Your IP has been banned from {$set['game_name']}, there is no way around this.</font></b></P></CENTER></body></html>");
+        }
 
-print <<<OUT
+        print <<<OUT
 
 <!-- Begin Main Content -->     
 
@@ -319,53 +319,53 @@ print <<<OUT
 
 <!-- Links -->
 OUT;
-}
-function menuarea()
-{
-include "mainmenu.php";
-global $ir,$c;
-$bgcolor = '000000';
-print '</td><td width="2" class="linegrad" bgcolor="#'.$bgcolor.'">&nbsp;</td><td width="80%"  bgcolor="#'.$bgcolor.'" valign="top"><center>';
+    }
 
-if($ir['hospital'])
-{
-print "<font color='red'><b>NOTE:</b></font> You are currently in hospital for {$ir['hospital']} minutes.<br/><br />";
-}
-if($ir['jail'])
-{
-print "<font color='red'><b>NOTE:</b></font> You are currently in jail for {$ir['jail']} minutes.<br/><br />";
-}
+    function menuarea()
+    {
+        include "mainmenu.php";
+        global $ir, $c;
+        $bgcolor = '000000';
+        print '</td><td width="2" class="linegrad" bgcolor="#' . $bgcolor . '">&nbsp;</td><td width="80%"  bgcolor="#' . $bgcolor . '" valign="top"><center>';
 
-if($ir['traveltime'] > 0)
-{
-print "<font color = 'red' /><b>Travelling for <b>{$ir['traveltime']} minutes</b>.</font><br /><br />";
-} 
+        if ($ir['hospital']) {
+            print "<font color='red'><b>NOTE:</b></font> You are currently in hospital for {$ir['hospital']} minutes.<br/><br />";
+        }
+        if ($ir['jail']) {
+            print "<font color='red'><b>NOTE:</b></font> You are currently in jail for {$ir['jail']} minutes.<br/><br />";
+        }
 
-if($ir['bguard'] >0)
-{
-print "<font color='green'><b>NOTE:</b></font> Your Bodyguard is protecting you for {$ir['bguard']} more minutes.<br/><br/>";
-}
+        if ($ir['traveltime'] > 0) {
+            print "<font color = 'red' /><b>Travelling for <b>{$ir['traveltime']} minutes</b>.</font><br /><br />";
+        }
+
+        if ($ir['bguard'] > 0) {
+            print "<font color='green'><b>NOTE:</b></font> Your Bodyguard is protecting you for {$ir['bguard']} more minutes.<br/><br/>";
+        }
 
 
-}
-function smenuarea()
-{
-include "smenu.php";
-global $ir,$c;
-$bgcolor = '000000';
-print '</td><td width="2" class="linegrad" bgcolor="#'.$bgcolor.'"> &nbsp; </td><td width="80%"  bgcolor="#'.$bgcolor.'" valign="top"><center>';
-}
-function endpage()
-{
-global $db;
+    }
+
+    function smenuarea()
+    {
+        include "smenu.php";
+        global $ir, $c;
+        $bgcolor = '000000';
+        print '</td><td width="2" class="linegrad" bgcolor="#' . $bgcolor . '"> &nbsp; </td><td width="80%"  bgcolor="#' . $bgcolor . '" valign="top"><center>';
+    }
+
+    function endpage()
+    {
+        global $db;
 
 //  Do Not Remove Powered By Mafia Game Script without permission .
 
 // However, if you would like to use the script without the powered by links you may do so by purchasing a Copyright removal license for a very low fee.  
 
-include "footer.php";
+        include "footer.php";
 
 
-}    
-} 
+    }
+}
+
 ?>

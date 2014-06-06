@@ -2,7 +2,7 @@
 
 
 // Do Not Remove Powered By Ravan Scripts without permission .
-              
+
 // However, if you would like to use the script without the powered by links you may do so by purchasing a Copyright removal license for a very low fee. 
 
 print "<div class='footerpart'>
@@ -10,5 +10,5 @@ print "<div class='footerpart'>
 </div>
 </body>
 </html> ";
-  
+
 ?>

@@ -2,27 +2,34 @@
 include "globals.php";
 
 
-switch($_GET['action'])
-{
-case 'play1': play_slots1(); break;
-case 'play2': play_slots2(); break;
-case 'play3': play_slots3(); break;
-default: slot_index(); break;
+switch ($_GET['action']) {
+    case 'play1':
+        play_slots1();
+        break;
+    case 'play2':
+        play_slots2();
+        break;
+    case 'play3':
+        play_slots3();
+        break;
+    default:
+        slot_index();
+        break;
 }
 
 function slot_index()
 {
-global $ir,$c,$h,$userid,$db;
+    global $ir, $c, $h, $userid, $db;
 
 
-$slot=$db->query("SELECT * FROM `4slot` WHERE `name`='1'");
-$pot=$db->fetch_row($slot);
+    $slot = $db->query("SELECT * FROM `4slot` WHERE `name`='1'");
+    $pot = $db->fetch_row($slot);
 
-$pota=money_formatter($pot['pot']);
-$potb=money_formatter($pot['pot2']); 
-$potc=money_formatter($pot['pot3']); 
+    $pota = money_formatter($pot['pot']);
+    $potb = money_formatter($pot['pot2']);
+    $potc = money_formatter($pot['pot3']);
 
-print "
+    print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -50,15 +57,13 @@ This is a community based game where every time you lose you add your money to t
 }
 
 
-
 function play_slots1()
 {
-global $ir,$c,$h,$userid,$db;
+    global $ir, $c, $h, $userid, $db;
 
 
-if($ir['money'] < 100)
-{
-print "
+    if ($ir['money'] < 100) {
+        print "
 
 <div id='mainOutput' style='text-align: center; color: white;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -71,23 +76,23 @@ You do not have enough money to play
 <a 
 
 ";
-$h->endpage();    
-exit;
-}
+        $h->endpage();
+        exit;
+    }
 
 
-$slot=$db->query("SELECT * FROM `4slot` WHERE `name`='1'");
-$pot=$db->fetch_row($slot);
-$db->query("UPDATE users SET money=money-100 WHERE $userid=userid");
-$db->query("UPDATE 4slot SET pot=pot+100 WHERE name=1");
+    $slot = $db->query("SELECT * FROM `4slot` WHERE `name`='1'");
+    $pot = $db->fetch_row($slot);
+    $db->query("UPDATE users SET money=money-100 WHERE $userid=userid");
+    $db->query("UPDATE 4slot SET pot=pot+100 WHERE name=1");
 
-$slotnumber1=rand(1,9);
-$slotnumber2=rand(1,9);
-$slotnumber3=rand(1,9);
-$crap=1;
-$pota=money_formatter($pot['pot']);
+    $slotnumber1 = rand(1, 9);
+    $slotnumber2 = rand(1, 9);
+    $slotnumber3 = rand(1, 9);
+    $crap = 1;
+    $pota = money_formatter($pot['pot']);
 
-print "
+    print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -97,26 +102,22 @@ print "
 
 <h2><b><center>$slotnumber1$slotnumber2$slotnumber3</center></b></h2><br />";
 
-if($slotnumber1==1 && $slotnumber2==1 && $slotnumber3==1 || $slotnumber1==5 && $slotnumber2==5 && $slotnumber3==5 || $slotnumber1==9 && $slotnumber2==9 && $slotnumber3==9)
-{
-print "<center><b>Congrats You Won!</b><br />You won {$pot['pot']}!!!";
-$db->query("UPDATE users SET money=money+{$pot['pot']} WHERE $userid=userid");
-$db->query("UPDATE 4slot SET pot=100 WHERE name=1");
-}
-else
-{
-print "<center> Sorry you did not win this time</center><br /><br />";
-}
-print "<center> <a href='magicslots.php?action=play1'>Play again?</a> | <a href='magicslots.php'>Back</a></center></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
+    if ($slotnumber1 == 1 && $slotnumber2 == 1 && $slotnumber3 == 1 || $slotnumber1 == 5 && $slotnumber2 == 5 && $slotnumber3 == 5 || $slotnumber1 == 9 && $slotnumber2 == 9 && $slotnumber3 == 9) {
+        print "<center><b>Congrats You Won!</b><br />You won {$pot['pot']}!!!";
+        $db->query("UPDATE users SET money=money+{$pot['pot']} WHERE $userid=userid");
+        $db->query("UPDATE 4slot SET pot=100 WHERE name=1");
+    } else {
+        print "<center> Sorry you did not win this time</center><br /><br />";
+    }
+    print "<center> <a href='magicslots.php?action=play1'>Play again?</a> | <a href='magicslots.php'>Back</a></center></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 }
 
 function play_slots2()
 {
-global $ir,$c,$h,$userid,$db;
+    global $ir, $c, $h, $userid, $db;
 
-if($ir['money'] < 1000)
-{
-print "
+    if ($ir['money'] < 1000) {
+        print "
 
 <div id='mainOutput' style='text-align: center; color: white;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -129,22 +130,22 @@ You do not have enough money to play
 <a 
 
 ";
-$h->endpage();    
-exit;
-}
+        $h->endpage();
+        exit;
+    }
 
-$slot=$db->query("SELECT * FROM `4slot` WHERE `name`='1'");
-$pot=$db->fetch_row($slot);
-$db->query("UPDATE users SET money=money-1000 WHERE $userid=userid");
-$db->query("UPDATE 4slot SET pot2=pot2+1000 WHERE name=1");
+    $slot = $db->query("SELECT * FROM `4slot` WHERE `name`='1'");
+    $pot = $db->fetch_row($slot);
+    $db->query("UPDATE users SET money=money-1000 WHERE $userid=userid");
+    $db->query("UPDATE 4slot SET pot2=pot2+1000 WHERE name=1");
 
-$slotnumber1=rand(1,9);
-$slotnumber2=rand(1,9);
-$slotnumber3=rand(1,9);
-$crap=1;
-$potb=money_formatter($pot['pot2']);
+    $slotnumber1 = rand(1, 9);
+    $slotnumber2 = rand(1, 9);
+    $slotnumber3 = rand(1, 9);
+    $crap = 1;
+    $potb = money_formatter($pot['pot2']);
 
-print "
+    print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -154,26 +155,22 @@ print "
 
 <h2><b><center>$slotnumber1$slotnumber2$slotnumber3</center></b></h2><br />";
 
-if($slotnumber1==1 && $slotnumber2==1 && $slotnumber3==1 || $slotnumber1==5 && $slotnumber2==5 && $slotnumber3==5 || $slotnumber1==9 && $slotnumber2==9 && $slotnumber3==9)
-{
-print "<center><b>Congrats You Won!</b><br />You won {$pot['pot2']}!!!";
-$db->query("UPDATE users SET money=money+{$pot['pot2']} WHERE $userid=userid");
-$db->query("UPDATE 4slot SET pot2=1000 WHERE name=1");
-}
-else
-{
-print "<center> Sorry you did not win this time</center><br /><br />";
-}
-print "<center><a href='magicslots.php?action=play2'>Play again?</a> | <a href='magicslots.php'>Back</a></center></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
+    if ($slotnumber1 == 1 && $slotnumber2 == 1 && $slotnumber3 == 1 || $slotnumber1 == 5 && $slotnumber2 == 5 && $slotnumber3 == 5 || $slotnumber1 == 9 && $slotnumber2 == 9 && $slotnumber3 == 9) {
+        print "<center><b>Congrats You Won!</b><br />You won {$pot['pot2']}!!!";
+        $db->query("UPDATE users SET money=money+{$pot['pot2']} WHERE $userid=userid");
+        $db->query("UPDATE 4slot SET pot2=1000 WHERE name=1");
+    } else {
+        print "<center> Sorry you did not win this time</center><br /><br />";
+    }
+    print "<center><a href='magicslots.php?action=play2'>Play again?</a> | <a href='magicslots.php'>Back</a></center></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 }
 
 function play_slots3()
 {
-global $ir,$c,$h,$userid,$db;
+    global $ir, $c, $h, $userid, $db;
 
-if($ir['money'] < 10000)
-{
-print "
+    if ($ir['money'] < 10000) {
+        print "
 
 <div id='mainOutput' style='text-align: center; color: white;  width: 600px; border: 1px solid #222222; height: 70px;
 margin: 0 auto 10px; clear: both; position: relative; left: -20px; padding: 8px'>
@@ -186,22 +183,22 @@ You do not have enough money to play
 <a 
 
 ";
-$h->endpage();    
-exit;
-}
+        $h->endpage();
+        exit;
+    }
 
-$slot=$db->query("SELECT * FROM `4slot` WHERE `name`='1'");
-$pot=$db->fetch_row($slot);
-$db->query("UPDATE users SET money=money-10000 WHERE $userid=userid");
-$db->query("UPDATE 4slot SET pot3=pot3+10000 WHERE name=1");
+    $slot = $db->query("SELECT * FROM `4slot` WHERE `name`='1'");
+    $pot = $db->fetch_row($slot);
+    $db->query("UPDATE users SET money=money-10000 WHERE $userid=userid");
+    $db->query("UPDATE 4slot SET pot3=pot3+10000 WHERE name=1");
 
-$slotnumber1=rand(1,9);
-$slotnumber2=rand(1,9);
-$slotnumber3=rand(1,9);
-$crap=1;
-$potc=money_formatter($pot['pot3']); 
+    $slotnumber1 = rand(1, 9);
+    $slotnumber2 = rand(1, 9);
+    $slotnumber3 = rand(1, 9);
+    $crap = 1;
+    $potc = money_formatter($pot['pot3']);
 
-print "
+    print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
@@ -211,17 +208,14 @@ print "
 
 <h2><b><center>$slotnumber1$slotnumber2$slotnumber3</center></b></h2><br />";
 
-if($slotnumber1==1 && $slotnumber2==1 && $slotnumber3==1 || $slotnumber1==5 && $slotnumber2==5 && $slotnumber3==5 || $slotnumber1==9 && $slotnumber2==9 && $slotnumber3==9)
-{
-print "<center><b>Congrats You Won!</b><br />You won {$pot['pot3']}!!!";
-$db->query("UPDATE users SET money=money+{$pot['pot3']} WHERE $userid=userid");
-$db->query("UPDATE 4slot SET pot3=10000 WHERE name=1");
-}
-else
-{
-print "<center> Sorry you did not win this time</center><br /><br />";
-}
-print "<center><a href='magicslots.php?action=play3'>Play again?</a> | <a href='magicslots.php'>Back</a></center></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
+    if ($slotnumber1 == 1 && $slotnumber2 == 1 && $slotnumber3 == 1 || $slotnumber1 == 5 && $slotnumber2 == 5 && $slotnumber3 == 5 || $slotnumber1 == 9 && $slotnumber2 == 9 && $slotnumber3 == 9) {
+        print "<center><b>Congrats You Won!</b><br />You won {$pot['pot3']}!!!";
+        $db->query("UPDATE users SET money=money+{$pot['pot3']} WHERE $userid=userid");
+        $db->query("UPDATE 4slot SET pot3=10000 WHERE name=1");
+    } else {
+        print "<center> Sorry you did not win this time</center><br /><br />";
+    }
+    print "<center><a href='magicslots.php?action=play3'>Play again?</a> | <a href='magicslots.php'>Back</a></center></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 }
 
 $h->endpage();

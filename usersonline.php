@@ -1,24 +1,24 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
 include "globals.php";
 print " ";
-$cn=0;
-$q=$db->query("SELECT * FROM users WHERE laston>unix_timestamp()-15*60 ORDER BY laston DESC");
+$cn = 0;
+$q = $db->query("SELECT * FROM users WHERE laston>unix_timestamp()-15*60 ORDER BY laston DESC");
 
 
 print"
@@ -54,78 +54,62 @@ print"
 </tr>";
 
 
-while($r=$db->fetch_row($q))
-{
-$la=time()-$r['laston'];
-$unit="secs";
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="mins";
-}
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="hours";
-if($la >= 24)
-{
-$la=(int) ($la/24);
-$unit="days";
-}
-}
-if($r['laston'] > 0)
-{
-$la=time()-$r['laston'];
-$unit="seconds";
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="minutes";
-}
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="hours";
-if($la >= 24)
-{
-$la=(int) ($la/24);
-$unit="days";
-}
-}
-$str="$la $unit ago";
-}
-else
-{
-$str="--";
-}
-if($r['last_login'] > 0)
-{
-$ll=time()-$r['last_login'];
-$unit2="seconds";
-if($ll >= 60)
-{
-$ll=(int) ($ll/60);
-$unit2="minutes";
-}
-if($ll >= 60)
-{
-$ll=(int) ($ll/60);
-$unit2="hours";
-if($ll >= 24)
-{
-$ll=(int) ($ll/24);
-$unit2="days";
-}
-}
-$str2="$ll $unit2 ago";
-}
-else
-{
-$str2="--";
-}
-$money=money_formatter($r['money']); 
-$cn++;
-print"
+while ($r = $db->fetch_row($q)) {
+    $la = time() - $r['laston'];
+    $unit = "secs";
+    if ($la >= 60) {
+        $la = (int)($la / 60);
+        $unit = "mins";
+    }
+    if ($la >= 60) {
+        $la = (int)($la / 60);
+        $unit = "hours";
+        if ($la >= 24) {
+            $la = (int)($la / 24);
+            $unit = "days";
+        }
+    }
+    if ($r['laston'] > 0) {
+        $la = time() - $r['laston'];
+        $unit = "seconds";
+        if ($la >= 60) {
+            $la = (int)($la / 60);
+            $unit = "minutes";
+        }
+        if ($la >= 60) {
+            $la = (int)($la / 60);
+            $unit = "hours";
+            if ($la >= 24) {
+                $la = (int)($la / 24);
+                $unit = "days";
+            }
+        }
+        $str = "$la $unit ago";
+    } else {
+        $str = "--";
+    }
+    if ($r['last_login'] > 0) {
+        $ll = time() - $r['last_login'];
+        $unit2 = "seconds";
+        if ($ll >= 60) {
+            $ll = (int)($ll / 60);
+            $unit2 = "minutes";
+        }
+        if ($ll >= 60) {
+            $ll = (int)($ll / 60);
+            $unit2 = "hours";
+            if ($ll >= 24) {
+                $ll = (int)($ll / 24);
+                $unit2 = "days";
+            }
+        }
+        $str2 = "$ll $unit2 ago";
+    } else {
+        $str2 = "--";
+    }
+    $money = money_formatter($r['money']);
+    $cn++;
+    print"
 
 <tr>
 <td><div align='center'><strong>
@@ -153,7 +137,7 @@ $money</a><br />
 <a href='attack.php?ID={$r['userid']}'>Attack</a><br />
 </div></strong></td>
  ";
-} 
+}
 
 print "</table> </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> ";
 $h->endpage();

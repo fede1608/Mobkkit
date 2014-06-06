@@ -1,5 +1,5 @@
 <?php
-include_once (DIRNAME(__FILE__) . '/globals.php');
+include_once(DIRNAME(__FILE__) . '/globals.php');
 
 
 print "
@@ -13,24 +13,22 @@ print "
 <b>Specials unlocked:</b><b/><br/>You have {$ir['comppoints']} company points, What would you like to spend them on?<br/><br/>
 <form action='compspecials.php' method='post'> 
 <table width=75% cellspacing=1 class='table'><tr style='background:gray'><th>Reward</th><th>Cost</th><th>Take</th</tr>";
-global $ir,$db;   
+global $ir, $db;
 $com = $db->query("SELECT bmembBusiness FROM businesses_members WHERE bmembMember='{$ir['userid']}'");
-$cc=$db->fetch_row($com);
+$cc = $db->fetch_row($com);
 $clas = $db->query("SELECT * FROM businesses WHERE busId='{$cc['bmembBusiness']}'");
-$cs=$db->fetch_row($clas);
+$cs = $db->fetch_row($clas);
 $clas = $db->query("SELECT * FROM businesses WHERE busDirector='1'");
-$cs=$db->fetch_row($clas);
+$cs = $db->fetch_row($clas);
 
-$js=$db->query("SELECT * FROM compspecials WHERE csJOB='{$cs['busClass']}'");
-if($db->num_rows($js) == 0)
-{
-print "<tr class='row$current_row'><td colspan=3>This Company has no Specials</td></tr>";
-$current_row = 1 - $current_row;
+$js = $db->query("SELECT * FROM compspecials WHERE csJOB='{$cs['busClass']}'");
+if ($db->num_rows($js) == 0) {
+    print "<tr class='row$current_row'><td colspan=3>This Company has no Specials</td></tr>";
+    $current_row = 1 - $current_row;
 }
-while($sp=$db->fetch_row($js))
-{
-print "<tr class='row$current_row'><td><font color=white>{$sp['csNAME']}</td><td> <font color=#FF0000> <b>{$sp['csCOST']} </b>  <b>Company Points</b> </font> </td><td><center><input type='radio' name='ID' value='{$sp['csID']}' /></td></tr>";
-$current_row = 1 - $current_row;
+while ($sp = $db->fetch_row($js)) {
+    print "<tr class='row$current_row'><td><font color=white>{$sp['csNAME']}</td><td> <font color=#FF0000> <b>{$sp['csCOST']} </b>  <b>Company Points</b> </font> </td><td><center><input type='radio' name='ID' value='{$sp['csID']}' /></td></tr>";
+    $current_row = 1 - $current_row;
 }
 print "<tr>
 <td colspan=3><div align=center><input type='submit' value='Purchase'></div></td>

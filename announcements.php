@@ -1,23 +1,23 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
 include "globals.php";
-$ac=$ir['new_announcements'];
-$q=$db->query("SELECT * FROM announcements ORDER BY a_time DESC");
+$ac = $ir['new_announcements'];
+$q = $db->query("SELECT * FROM announcements ORDER BY a_time DESC");
 print "
 
 
@@ -34,23 +34,18 @@ print "
 <th>Time</th>
 <th>Announcement</th>
 </tr>";
-while($r=$db->fetch_row($q))
-{
-if($ac > 0)
-{
-$ac--;
-$new="<br /><b>New!</b>";
-}
-else
-{
-$new="";
-}
-print "<tr><td valign=top>".date('F j Y, g:i:s a', $r['a_time']).$new."</td><td valign=top>{$r['a_text']}</td></tr>";
+while ($r = $db->fetch_row($q)) {
+    if ($ac > 0) {
+        $ac--;
+        $new = "<br /><b>New!</b>";
+    } else {
+        $new = "";
+    }
+    print "<tr><td valign=top>" . date('F j Y, g:i:s a', $r['a_time']) . $new . "</td><td valign=top>{$r['a_text']}</td></tr>";
 }
 print "</table></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
-if($ir['new_announcements'])
-{
-$db->query("UPDATE users SET new_announcements=0 WHERE userid={$userid}");
+if ($ir['new_announcements']) {
+    $db->query("UPDATE users SET new_announcements=0 WHERE userid={$userid}");
 }
 $h->endpage();
 ?>

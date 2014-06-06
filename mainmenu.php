@@ -1,28 +1,27 @@
-<?php  
+<?php
 
-   /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+/**************************************************************************************************
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
-global $db,$c,$ir, $set;
-$hc=$set['hospital_count'];
-$jc=$set['jail_count'];
-$ec=$ir['new_events'];
-$mc=$ir['new_mail'];
-if($ir['hospital'])
-{
-print "
+global $db, $c, $ir, $set;
+$hc = $set['hospital_count'];
+$jc = $set['jail_count'];
+$ec = $ir['new_events'];
+$mc = $ir['new_mail'];
+if ($ir['hospital']) {
+    print "
 
 <div class='navipart'>
 <div class='navitop'><p>
@@ -37,11 +36,9 @@ print "
 <li> <a class='link1' href='shops.php'>Medical Shop</a></li>
 <li> <a class='link1' href='hospital.php'>Hospital ($hc)</a></li> 
 <li> <a class='link1' href='inventory.php'>Inventory</a></li>";
-}
-elseif($ir['jail'])
-{
+} elseif ($ir['jail']) {
 
-print "
+    print "
 
 <div class='navipart'>
 <div class='navitop'><p>
@@ -52,10 +49,8 @@ print "
 
 
 <li><a class='link1' href='jail.php'>Jail ($jc)</a></li>";
-}
-else
-{
-print "
+} else {
+    print "
 
 
 <div class='navipart'>
@@ -69,28 +64,28 @@ print "
 <li><a class='link1' href='index.php'>Home</a></li><li>
 <a class='link1' href='inventory.php'>Inventory</a></li>";
 }
-if($ec > 0) { print "<li> <a class='link1' href='events.php'>Events ($ec)</a></li>"; }
-else { print "<li> <a class='link1' href='events.php'>Events (0)</a></li>"; }
-if($mc > 0) { print "<li> <a class='link1' href='mailbox.php'>Mailbox ($mc)</a></li>"; }
-else { print "<li> <a class='link1' href='mailbox.php'>Mailbox (0)</a></li>"; }
-if($ir['new_announcements'])
-{
-print "<li> <a class='link1' href='announcements.php' style='font-weight: 800;'>Announcements ({$ir['new_announcements']})</a></li>";
+if ($ec > 0) {
+    print "<li> <a class='link1' href='events.php'>Events ($ec)</a></li>";
+} else {
+    print "<li> <a class='link1' href='events.php'>Events (0)</a></li>";
 }
-else
-{
-print "<li> <a class='link1' href='announcements.php'>Announcements (0)</a></li>";
+if ($mc > 0) {
+    print "<li> <a class='link1' href='mailbox.php'>Mailbox ($mc)</a></li>";
+} else {
+    print "<li> <a class='link1' href='mailbox.php'>Mailbox (0)</a></li>";
+}
+if ($ir['new_announcements']) {
+    print "<li> <a class='link1' href='announcements.php' style='font-weight: 800;'>Announcements ({$ir['new_announcements']})</a></li>";
+} else {
+    print "<li> <a class='link1' href='announcements.php'>Announcements (0)</a></li>";
 }
 
 
-if($ir['jail'] and !$ir['hospital'])
-{
-print "<li> <a class='link1' href='gym.php'>Jail Gym</a></li>
+if ($ir['jail'] and !$ir['hospital']) {
+    print "<li> <a class='link1' href='gym.php'>Jail Gym</a></li>
 <li> <a class='link1' href='hospital.php'>Hospital ($hc)</a></li>";
-}
-else if (!$ir['hospital'])
-{
-print "<li> <a class='link1' href='explore.php'>Explore</a></li>
+} else if (!$ir['hospital']) {
+    print "<li> <a class='link1' href='explore.php'>Explore</a></li>
 <li> <a class='link1' href='gym.php'>Gym</a></li>
 <li> <a class='link1' href='criminal.php'>Crimes</a></li>
 <li> <a class='link1' href='job.php'>Your Job</a></li>
@@ -100,10 +95,8 @@ print "<li> <a class='link1' href='explore.php'>Explore</a></li>
 <li> <a class='link1' href='education.php'>Local School</a></li>
 <li> <a class='link1' href='hospital.php'>Hospital ($hc)</a></li>
 <li> <a class='link1' href='jail.php'>Jail ($jc)</a></li>";
-}
-else
-{
-print "<li> <a class='link1' href='jail.php'>Jail ($jc)</a></li>";
+} else {
+    print "<li> <a class='link1' href='jail.php'>Jail ($jc)</a></li>";
 }
 print "<li> <a class='link1' href='forums.php'>Forums</a></li>";
 
@@ -112,9 +105,8 @@ print "
 <li> <a class='link1' href='search.php'>Search</a></li>";
 
 
-if($ir['jail'] )
-{
-print "
+if ($ir['jail']) {
+    print "
 
 </div>
 <div><img src='images/navi_btm.gif' alt='' /></div>
@@ -124,9 +116,8 @@ print "
 }
 
 
-if(!$ir['jail'] )
-{
-print "<li> <a class='link1' href='yourgang.php'>Your Gang</a></li>
+if (!$ir['jail']) {
+    print "<li> <a class='link1' href='yourgang.php'>Your Gang</a></li>
 
 
 </div>
@@ -139,9 +130,8 @@ print "<li> <a class='link1' href='yourgang.php'>Your Gang</a></li>
 }
 
 
-if($ir['user_level'] > 1)
-{
-print "
+if ($ir['user_level'] > 1) {
+    print "
 
 
 <div class='navipart'>
@@ -169,27 +159,23 @@ print "
 </p></div>
 <div class='navi_mid'><ul> 
 ";
-$q=$db->query("SELECT * FROM users WHERE laston>(unix_timestamp()-15*60) AND user_level>1 ORDER BY userid ASC");
-while($r=$db->fetch_row($q))
-{
-$la=time()-$r['laston'];
-$unit="secs";
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="mins";
-}
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="hours";
-if($la >= 24)
-{
-$la=(int) ($la/24);
-$unit="days";
-}
-}
-print "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='viewuser.php?u={$r['userid']}'>{$r['username']}</a> ($la $unit)<br>";
+$q = $db->query("SELECT * FROM users WHERE laston>(unix_timestamp()-15*60) AND user_level>1 ORDER BY userid ASC");
+while ($r = $db->fetch_row($q)) {
+    $la = time() - $r['laston'];
+    $unit = "secs";
+    if ($la >= 60) {
+        $la = (int)($la / 60);
+        $unit = "mins";
+    }
+    if ($la >= 60) {
+        $la = (int)($la / 60);
+        $unit = "hours";
+        if ($la >= 24) {
+            $la = (int)($la / 24);
+            $unit = "days";
+        }
+    }
+    print "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='viewuser.php?u={$r['userid']}'>{$r['username']}</a> ($la $unit)<br>";
 }
 
 print"</div>
@@ -197,9 +183,8 @@ print"</div>
 <div><img src='images/navi_btm.gif' alt='' /></div>
 </div>  ";
 
-if($ir['donatordays'])
-{
-print "
+if ($ir['donatordays']) {
+    print "
 
 
 <div class='navipart'>
@@ -242,7 +227,7 @@ print "
 </div>  
 
 
-" ; 
+";
 
 
 

@@ -1,6 +1,6 @@
 <?php
 
-  print "
+print "
 
 <!--  Do Not Remove Powered By Ravan Scripts without permission .
               
@@ -21,7 +21,7 @@ However, if you would like to use the script without the powered by links you ma
                    <center> Powered By Ravans <a href=http://ravan.info/_catalog/php_scripts/_mmorpg_game_script_v_1.2>Online Mafia Script</a> &nbsp; </center>  <br>  <br> 
                     <br>    <br>   <br>  
                     
-                     <center> <h3> Current Server Time: " .date ('F j, Y')."&nbsp;&nbsp;&nbsp;&nbsp;".date('g:i:s a'). " </h3> </center>  
+                     <center> <h3> Current Server Time: " . date('F j, Y') . "&nbsp;&nbsp;&nbsp;&nbsp;" . date('g:i:s a') . " </h3> </center>
                     
                     </div>
                

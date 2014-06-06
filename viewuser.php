@@ -1,97 +1,100 @@
 <?php
 
 /**************************************************************************************************
-| Software Name        : Ravan Scripts Online Mafia Game
-| Software Author      : Ravan Soft Tech
-| Software Version     : Version 2.0.1 Build 2101
-| Website              : http://www.ravan.info/
-| E-mail               : support@ravan.info
-|**************************************************************************************************
-| The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
-| The files in the package must not be distributed in whole or significant part.
-| All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
-|**************************************************************************************************
-| Copyright (c) 2010 Ravan Scripts . All rights reserved.
-|**************************************************************************************************/
+ * | Software Name        : Ravan Scripts Online Mafia Game
+ * | Software Author      : Ravan Soft Tech
+ * | Software Version     : Version 2.0.1 Build 2101
+ * | Website              : http://www.ravan.info/
+ * | E-mail               : support@ravan.info
+ * |**************************************************************************************************
+ * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+ * | The files in the package must not be distributed in whole or significant part.
+ * | All code is copyrighted unless otherwise advised.
+ * | Do Not Remove Powered By Ravan Scripts without permission .
+ * |**************************************************************************************************
+ * | Copyright (c) 2010 Ravan Scripts . All rights reserved.
+ * |**************************************************************************************************/
 
 include "globals.php";
-$_GET['u'] = abs((int) $_GET['u']);
-if(!$_GET['u'])
-{
-print "Invalid use of file";
-}
-else
-{
-$q=$db->query("SELECT u.*,us.*,c.*,h.*,g.*,f.* FROM users u LEFT JOIN userstats us ON u.userid=us.userid LEFT JOIN cities c ON u.location=c.cityid LEFT JOIN houses h ON u.maxwill=h.hWILL LEFT JOIN gangs g ON g.gangID=u.gang LEFT JOIN fedjail f ON f.fed_userid=u.userid WHERE u.userid={$_GET['u']}");
-if($db->num_rows($q) == 0)
-{
-print "Sorry, we could not find a user with that ID, check your source.";
-}
-else
-{
-$r=$db->fetch_row($q);
-if($r['user_level'] == 1) { $userl="Member"; } else if($r['user_level'] == 2) { $userl="Admin"; } else if ($r['user_level'] == 3) { $userl="Secretary"; } else if($r['user_level'] == 0) { $userl="NPC"; }  else {$userl="Assistant"; }
-$lon=($r['laston'] > 0) ?date('F j, Y g:i:s a',$r['laston']) : "Never";
-$sup=date('F j, Y g:i:s a',$r['signedup']);
-$ts=$r['strength']+$r['agility']+$r['guard']+$r['labour']+$r['IQ'];
-$d="";
-if($r['laston'] > 0)
-{
-$la=time()-$r['laston'];
-$unit="seconds";
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="minutes";
-}
-if($la >= 60)
-{
-$la=(int) ($la/60);
-$unit="hours";
-if($la >= 24)
-{
-$la=(int) ($la/24);
-$unit="days";
-}
-}
-$str="$la $unit ago";
-}
-else
-{
-$str="--";
-}
-if($r['last_login'] > 0)
-{
-$ll=time()-$r['last_login'];
-$unit2="seconds";
-if($ll >= 60)
-{
-$ll=(int) ($ll/60);
-$unit2="minutes";
-}
-if($ll >= 60)
-{
-$ll=(int) ($ll/60);
-$unit2="hours";
-if($ll >= 24)
-{
-$ll=(int) ($ll/24);
-$unit2="days";
-}
-}
-$str2="$ll $unit2 ago";
-}
-else
-{
-$str2="--";
-}
+$_GET['u'] = abs((int)$_GET['u']);
+if (!$_GET['u']) {
+    print "Invalid use of file";
+} else {
+    $q = $db->query("SELECT u.*,us.*,c.*,h.*,g.*,f.* FROM users u LEFT JOIN userstats us ON u.userid=us.userid LEFT JOIN cities c ON u.location=c.cityid LEFT JOIN houses h ON u.maxwill=h.hWILL LEFT JOIN gangs g ON g.gangID=u.gang LEFT JOIN fedjail f ON f.fed_userid=u.userid WHERE u.userid={$_GET['u']}");
+    if ($db->num_rows($q) == 0) {
+        print "Sorry, we could not find a user with that ID, check your source.";
+    } else {
+        $r = $db->fetch_row($q);
+        if ($r['user_level'] == 1) {
+            $userl = "Member";
+        } else if ($r['user_level'] == 2) {
+            $userl = "Admin";
+        } else if ($r['user_level'] == 3) {
+            $userl = "Secretary";
+        } else if ($r['user_level'] == 0) {
+            $userl = "NPC";
+        } else {
+            $userl = "Assistant";
+        }
+        $lon = ($r['laston'] > 0) ? date('F j, Y g:i:s a', $r['laston']) : "Never";
+        $sup = date('F j, Y g:i:s a', $r['signedup']);
+        $ts = $r['strength'] + $r['agility'] + $r['guard'] + $r['labour'] + $r['IQ'];
+        $d = "";
+        if ($r['laston'] > 0) {
+            $la = time() - $r['laston'];
+            $unit = "seconds";
+            if ($la >= 60) {
+                $la = (int)($la / 60);
+                $unit = "minutes";
+            }
+            if ($la >= 60) {
+                $la = (int)($la / 60);
+                $unit = "hours";
+                if ($la >= 24) {
+                    $la = (int)($la / 24);
+                    $unit = "days";
+                }
+            }
+            $str = "$la $unit ago";
+        } else {
+            $str = "--";
+        }
+        if ($r['last_login'] > 0) {
+            $ll = time() - $r['last_login'];
+            $unit2 = "seconds";
+            if ($ll >= 60) {
+                $ll = (int)($ll / 60);
+                $unit2 = "minutes";
+            }
+            if ($ll >= 60) {
+                $ll = (int)($ll / 60);
+                $unit2 = "hours";
+                if ($ll >= 24) {
+                    $ll = (int)($ll / 24);
+                    $unit2 = "days";
+                }
+            }
+            $str2 = "$ll $unit2 ago";
+        } else {
+            $str2 = "--";
+        }
 
-$money=money_formatter($r['money']); 
-if($r['donatordays']) { $r['username'] = "<font color=green>{$r['username']}</font>";$d="<img src='donator.gif' alt='Donator: {$r['donatordays']} Days Left' title='Donator: {$r['donatordays']} Days Left' />"; }
-if($r['laston'] >= time()-15*60) { $on="images/online.gif"; }  else { $on="images/offline.gif"; }
-if($r['laston'] >= time()-15*60) { $status="Online"; } else { $status="Offline"; }
-print "
+        $money = money_formatter($r['money']);
+        if ($r['donatordays']) {
+            $r['username'] = "<font color=green>{$r['username']}</font>";
+            $d = "<img src='donator.gif' alt='Donator: {$r['donatordays']} Days Left' title='Donator: {$r['donatordays']} Days Left' />";
+        }
+        if ($r['laston'] >= time() - 15 * 60) {
+            $on = "images/online.gif";
+        } else {
+            $on = "images/offline.gif";
+        }
+        if ($r['laston'] >= time() - 15 * 60) {
+            $status = "Online";
+        } else {
+            $status = "Offline";
+        }
+        print "
 
 <div class='icolumn2' id='mainContentDiv'>
 
@@ -116,28 +119,22 @@ print "
 </div> ";
 
 
-if($r['donatordays'] > 0)
-{
-    
-print " 
+        if ($r['donatordays'] > 0) {
+
+            print "
 
 <div class='res_txtpart'>  
 
 <div class='restxt_bg'></div>  ";
-    
-}
+
+        } else
+
+            print " <br/> <br/>  ";
 
 
-else
+        print "
 
-print " <br/> <br/>  ";
-
-  
-
-
-print " 
-
-<b> ".get_gameranks($r['level'],$r['hPRICE'],$r)." </b>
+<b> " . get_gameranks($r['level'], $r['hPRICE'], $r) . " </b>
 
 <div class='leveltxt'  style='background:url(./images/exp_100.gif);' style='float: left'>Level {$r['level']}</div>
 
@@ -211,10 +208,10 @@ print "
     <div class='cap_txt2'>{$r['hp']}/{$r['maxhp']} </div>
 </div> ";
 
-$rr=$db->query("SELECT * FROM referals WHERE refREFER={$r['userid']}");
-$referal=$db->num_rows($rr);
+        $rr = $db->query("SELECT * FROM referals WHERE refREFER={$r['userid']}");
+        $referal = $db->num_rows($rr);
 
-print " 
+        print "
      <div class='cap_txtpart'>
     <div class='cap_txt1'>Friends:</div>
     <div class='cap_txt2'>{$r['friend_count']}</div>
@@ -251,16 +248,13 @@ print "
 
 ";
 
-if($r['gang'])
-{
-print " <a href='gangs.php?action=gang_view&gang_id={$r['gang']}'>{$r['gangNAME']} </a> ";
-}
-else
-{
-print "N/A";
-}
+        if ($r['gang']) {
+            print " <a href='gangs.php?action=gang_view&gang_id={$r['gang']}'>{$r['gangNAME']} </a> ";
+        } else {
+            print "N/A";
+        }
 
-print" </div>
+        print" </div>
 <div class='mem_right_imgpart'>
     <!--<div class='money_img' style='background: url(./images/money_img.jpg) no-repeat; overflow: hidden; width: 210px; padding-top:100px;padding-buttom:66px;text-align:center;color:red;font-weight:bold;'>$5,250</div>-->
     <div class='money_img' style='text-align:center;'><a href='voting.php'>{$money}<br /><img src='images/money_img.jpg' /></a></div>
@@ -300,9 +294,8 @@ print" </div>
 </div> ";
 
 
-if($r['fedjail'])
-{
-print "<br />
+        if ($r['fedjail']) {
+            print "<br />
 
 
 <div class='cmt_tittxt'>&nbsp;</div><div><img src='images/generalinfo_top.jpg' alt='' /></div>
@@ -312,10 +305,9 @@ print "<br />
 <b><font color=red>In federal jail for {$r['fed_days']} day(s).&nbsp;&nbsp;{$r['fed_reason']}</font></b>
 </div>
 <div><img src='images/generalinfo_btm.jpg' alt='' /></div><br>";
-}
-if($r['hospital'])
-{
-print "<br />
+        }
+        if ($r['hospital']) {
+            print "<br />
 <div class='cmt_tittxt'>&nbsp;</div><div><img src='images/generalinfo_top.jpg' alt='' /></div>
 
 <div class='generalinfo_simple'>
@@ -323,31 +315,25 @@ print "<br />
 <b><font color=red>In hospital for {$r['hospital']} minutes.&nbsp;&nbsp;{$r['hospreason']}</font></b>
 </div>
 <div><img src='images/generalinfo_btm.jpg' alt='' /></div><br>";
-}
-if($r['jail'])
-{
-print "<br />
+        }
+        if ($r['jail']) {
+            print "<br />
 <div class='cmt_tittxt'>&nbsp;</div><div><img src='images/generalinfo_top.jpg' alt='' /></div>
 
 <div class='generalinfo_simple'><b><font color=red>In jail for {$r['jail']} minutes.&nbsp;&nbsp;{$r['jail_reason']}</font></b>
 </div>
 <div><img src='images/generalinfo_btm.jpg' alt='' /></div>";
-}
+        }
 
 
-
-
-
-
-if($ir['user_level'] == 2 || $ir['user_level'] == 3 || $ir['user_level'] == 5)
-{
-$r['lastiph']=@gethostbyaddr($r['lastip']);
-$r['lastiph']=checkblank($r['lastiph']);
-$r['lastip_loginh']=@gethostbyaddr($r['lastip_login']);
-$r['lastip_loginh']=checkblank($r['lastip_loginh']);
-$r['lastip_signuph']=@gethostbyaddr($r['lastip_signup']);
-$r['lastip_signuph']=checkblank($r['lastip_signuph']);
-print "  <style type='text/css'>
+        if ($ir['user_level'] == 2 || $ir['user_level'] == 3 || $ir['user_level'] == 5) {
+            $r['lastiph'] = @gethostbyaddr($r['lastip']);
+            $r['lastiph'] = checkblank($r['lastiph']);
+            $r['lastip_loginh'] = @gethostbyaddr($r['lastip_login']);
+            $r['lastip_loginh'] = checkblank($r['lastip_loginh']);
+            $r['lastip_signuph'] = @gethostbyaddr($r['lastip_signup']);
+            $r['lastip_signuph'] = checkblank($r['lastip_signuph']);
+            print "  <style type='text/css'>
 .style1 {   text-align: center;}</style>
 <div class='style1'><br>  <br><h2>User Internet Info </div></h3> 
 
@@ -356,20 +342,18 @@ print "  <style type='text/css'>
 <tr><td class='h'>Last Hit</td><td>$r[lastip]</td><td>$r[lastiph]</td></tr>
 <tr><td class='h'>Last Login</td><td>$r[lastip_login]</td><td>$r[lastip_loginh]</td></tr>
 <tr><td class='h'>Signup</td><td>$r[lastip_signup]</td><td>$r[lastip_signuph]</td></tr></table>";
-print "<form action='staffnotes.php' method='post'>
+            print "<form action='staffnotes.php' method='post'>
 Staff Notes: <br />
 <textarea rows=4 cols=40 name='staffnotes'>{$r['staffnotes']}</textarea>
 <br /><input type='hidden' name='ID' value='{$_GET['u']}' />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Change' /></form></div> ";
-}
+        }
 
 
-
-if($ir['user_level'] == 2 || $ir['user_level'] == 3 || $ir['user_level'] == 5)
-{
+        if ($ir['user_level'] == 2 || $ir['user_level'] == 3 || $ir['user_level'] == 5) {
 
 
-print "
+            print "
 
 
 <div class='mem_rightbg2'>  
@@ -403,11 +387,10 @@ print "
 </div>
 </div>";
 
-} 
+        }
 
 
-
-print '
+        print '
 
 
 <div class="usercmtpart">
@@ -421,84 +404,70 @@ print '
 ';
 
 
-if($r['signature'])
-{
-print "<br />
+        if ($r['signature']) {
+            print "<br />
 <div class='cmt_tittxt'>&nbsp;</div><div><img src='images/generalinfo_top.jpg' alt='' /></div>
 
 <div class='generalinfo_simple'><b><i> <font color=white>{$r['signature']}</font></i> </b>
 </div>
-<div><img src='images/generalinfo_btm.jpg' alt='' /></div> <br/>" ;
-}
-else
-{
-print "<br />
+<div><img src='images/generalinfo_btm.jpg' alt='' /></div> <br/>";
+        } else {
+            print "<br />
 <div class='cmt_tittxt'>&nbsp;</div><div><img src='images/generalinfo_top.jpg' alt='' /></div>
 
 <div class='generalinfo_simple'><b><i><font color=white>User Has No Signature</font></i></b>
 </div>
-<div><img src='images/generalinfo_btm.jpg' alt='' /></div><br/>" ;
-}
+<div><img src='images/generalinfo_btm.jpg' alt='' /></div><br/>";
+        }
 
 
-
-print '
+        print '
 
 
 <div class="usercmtpart">
 <div><img src="images/usercomment_left.jpg" alt="" /></div>
 <div class="usercmt_txtpart">
 <div class="usercmt_left">User Comments</div>
-<div class="usercmt_right"><a href=Comments.php?ID='.$_GET['u'].' >Add Comment</a></div>
+<div class="usercmt_right"><a href=Comments.php?ID=' . $_GET['u'] . ' >Add Comment</a></div>
 </div>
 <div><img src="images/usercomment_right.jpg" alt="" /></div>
 </div>    
 ';
 
 
+        $Data = mysql_query("SELECT g.`ID`,g.`SenderID`,g.`RecieverID`,g.`Comment`,u.`userid`,u.`username` FROM `gComments` g LEFT JOIN `users` u " . "ON g.`SenderID` = u.`userid` WHERE (`RecieverID` = " . abs(intval($_GET['u'])) . ")");
+        if (!mysql_num_rows($Data)) {
 
-$Data = mysql_query("SELECT g.`ID`,g.`SenderID`,g.`RecieverID`,g.`Comment`,u.`userid`,u.`username` FROM `gComments` g LEFT JOIN `users` u "."ON g.`SenderID` = u.`userid` WHERE (`RecieverID` = ".abs(intval($_GET['u'])).")");
-if(!mysql_num_rows($Data))
-{
-
-print "<br />
+            print "<br />
 <div class='cmt_tittxt'>&nbsp;</div><div><img src='images/generalinfo_top.jpg' alt='' /></div>
 
 <div class='generalinfo_simple'><b><font color=green>User Has No Comments</font></b>
 </div>
-<div><img src='images/generalinfo_btm.jpg' alt='' /></div>" ;
+<div><img src='images/generalinfo_btm.jpg' alt='' /></div>";
 
 
-exit($h->endpage());
-}
+            exit($h->endpage());
+        } else {
 
-else
-{
-
-while($cData = mysql_fetch_array($Data))
-{
+            while ($cData = mysql_fetch_array($Data)) {
 
 
-print '                          
-<div class="cmt_tittxt"><a href=viewuser.php?u='.stripslashes($cData['userid']).'> '.htmlentities($cData['username']).' </a>  says :</div>    
+                print '
+<div class="cmt_tittxt"><a href=viewuser.php?u=' . stripslashes($cData['userid']) . '> ' . htmlentities($cData['username']) . ' </a>  says :</div>
 <div class="cmtbox_part"> ';
 
-if($_SESSION['userid'] === $cData['RecieverID'])
-{
-print'
-<div class="cmtbox_top" style="text-indent:400px;"> <a href = "/Comments.php?Delete&ID='.$cData['ID'].'"> Delete Comment </a> </div> ';
-} 
-
-else
-{
-print'
+                if ($_SESSION['userid'] === $cData['RecieverID']) {
+                    print'
+<div class="cmtbox_top" style="text-indent:400px;"> <a href = "/Comments.php?Delete&ID=' . $cData['ID'] . '"> Delete Comment </a> </div> ';
+                } else {
+                    print'
 <div class="cmtbox_top" style="text-indent:400px;"> </div> ';
-}
+                }
 
-print '
+                print '
 
 <div class="cmtbox_md">
-<div class="cmtcontent">'.stripslashes(htmlentities($cData['Comment'], ENT_QUOTES)).' </div>
+<div class="cmtcontent">' . stripslashes(htmlentities($cData['Comment'], ENT_QUOTES)) . ' </div>
 </div>
 <div><img src="images/cmtbox_btm.jpg" alt="" /></div>
 </div><br>
@@ -507,34 +476,27 @@ print '
 ';
 
 
-}
+            }
 
-}
-
-
-
-if($_SESSION['userid'] === $cData['RecieverID'])
-{
-echo ('
-<td width = "10%" align = "center"> <a href = "/Comments.php?Delete&ID='.$cData['ID'].'"> <span style = "color:#8B0000">Delete</span></a></td>');
-}
+        }
 
 
+        if ($_SESSION['userid'] === $cData['RecieverID']) {
+            echo('
+<td width = "10%" align = "center"> <a href = "/Comments.php?Delete&ID=' . $cData['ID'] . '"> <span style = "color:#8B0000">Delete</span></a></td>');
+        }
 
 
-
-
-
-
-
-
-print "</tr></table>";
-}
+        print "</tr></table>";
+    }
 }
 function checkblank($in)
 {
-if(!$in) { return "N/A"; }
-return $in;
+    if (!$in) {
+        return "N/A";
+    }
+    return $in;
 }
+
 $h->endpage();
 ?>

@@ -1,9 +1,10 @@
 <?php
-function bb2html($text) {
+function bb2html($text)
+{
 
     $pattern[] = "/\[url=([^<> \n]+?)\](.+?)\[\/url\]/i";
     $replacement[] = '<a href="\\1" target="_blank">\\2</a>';
-    
+
     $pattern[] = "/\[url\](.+?)\[\/url\]/i";
     $replacement[] = '<a href="\\1" target="_blank">\\1</a>';
 
@@ -24,7 +25,7 @@ function bb2html($text) {
 
     $pattern[] = "/\[[pP]\](.+?)\[\/[pP]\]/s";
     $replacement[] = '<p>\\1</p>';
-    
+
     $pattern[] = "/\[[sS]\](.+?)\[\/[sS]\]/s";
     $replacement[] = '<s>\\1</s>';
 
@@ -56,14 +57,15 @@ function bb2html($text) {
     $replacement[] = '<img src="icons/arrow.png" title="Arrow" align="middle" border="0"> ';
 
     $pattern[] = "/\[ab=([^<> \n].+?)\](.+?)\[\/ab\]/i";
-    $replacement[] = '<abbr title="\\1">\\2</abbr>';    
-    
+    $replacement[] = '<abbr title="\\1">\\2</abbr>';
+
     $text = preg_replace($pattern, $replacement, $text);
 
     return $text;
 }
 
-function strip_bbcode($text) {
+function strip_bbcode($text)
+{
 
     $pattern[] = "/\[url=([^<> \n]+?)\](.+?)\[\/url\]/i";
     $pattern[] = "/\[email=([^<> \n]+?)\](.+?)\[\/email\]/i";
