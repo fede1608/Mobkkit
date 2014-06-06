@@ -245,7 +245,7 @@ $fems $fem</div> <br /></td></tr>
 <div class='clear'>
 </div>
 <div class='footerpart'>
-<p><center>Game Copyright &copy; 2010 {$_SERVER['HTTP_HOST']}.  {$set['game_owner']}. &nbsp;&nbsp; Powered by Mafia Game Online <a href=http://ravan.info/_catalog/php_scripts/_mmorpg_game_script_v_1.2>Mafia Script</a></p>
+<p><center>Game Copyright &copy; 2014 {$_SERVER['HTTP_HOST']}.  {$set['game_owner']}. &nbsp;&nbsp; </p>
 </div>
 </body>
 </html>
@@ -338,7 +338,7 @@ $fems $fem</div> <br /></td></tr>
 <div class='clear'>
 </div>
 <div class='footerpart'>
-<p><center>Game Copyright &copy; 2010 {$_SERVER['HTTP_HOST']}.  {$set['game_owner']}. &nbsp;&nbsp; Powered by Mafia Game's Online <a href=http://mafiagamescript.net>Mafia Script</a></p>
+<p><center>Game Copyright &copy; 2014 {$_SERVER['HTTP_HOST']}.  {$set['game_owner']}. &nbsp;&nbsp; </p>
 </div>
 </body>
 </html> 

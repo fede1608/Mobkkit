@@ -7,7 +7,7 @@
  * | Website              : http://www.ravan.info/
  * | E-mail               : support@ravan.info
  * |**************************************************************************************************
- * | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
+
  * | The files in the package must not be distributed in whole or significant part.
  * | All code is copyrighted unless otherwise advised.
  * | Do Not Remove Powered By Ravan Scripts without permission .
@@ -23,7 +23,7 @@ print "
 
 <div class='generalinfo_txt'>
 <div><img src='images/info_left.jpg' alt='' /></div>
-<div class='info_mid'><h2 style='padding-top:10px;'> Announcement </h2></div>
+<div class='info_mid'><h2 style='padding-top:10px;'> "._("Announcement")."</h2></div>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>
 
@@ -31,13 +31,13 @@ print "
 <table width='80%' cellspacing='1' class='table'>
 
 <tr>
-<th>Time</th>
-<th>Announcement</th>
+<th>"._("Time")."</th>
+<th>"._("Announcement")."</th>
 </tr>";
 while ($r = $db->fetch_row($q)) {
     if ($ac > 0) {
         $ac--;
-        $new = "<br /><b>New!</b>";
+        $new = "<br /><b>"._("New")."!</b>";
     } else {
         $new = "";
     }
